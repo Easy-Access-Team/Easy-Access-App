@@ -1,0 +1,122 @@
+button{
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    color: var(--on-bg);
+    background: none;
+}
+.btn{
+    padding: .5rem 1rem;
+    border-radius: .25rem;
+    background: var(--surface-v);
+}
+
+.btn--primary{
+    background: var(--primary);
+    color: var(--on-primary);
+    transition: all 300ms linear;
+}
+.btn--primary:hover{
+    outline: 1px solid var(--primary);
+    color: var(--on-primary-cont);
+    background: var(--primary-cont);
+}
+.btn--secondary{
+    background: var(--secondary);
+    color: var(--on-secondary);
+    transition: all 300ms linear;
+}
+.btn--secondary:hover{
+    outline: 1px solid var(--secondary);
+    color: var(--on-secondary-cont);
+    background: var(--secondary-cont);
+}
+
+.btn--outline{
+    outline: 1px solid;
+    transition: all 300ms linear;
+}
+.outline--primary{
+    outline-color: var(--primary);
+    color: var(--primary);
+}
+.outline--primary:hover{
+    background: var(--primary);
+    color: var(--on-primary);
+}
+.outline--secondary{
+    outline-color: var(--secondary);
+    color: var(--secondary);
+}
+.outline--secondary:hover{
+    background: var(--secondary);
+    color: var(--on-secondary);
+}
+
+.btn--disabled{
+    background: var(--outline);
+    color: var(--surface-v);
+    cursor: not-allowed;
+}
+.btn--disabled i{
+    cursor: inherit;
+}
+
+.btn--icon{
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    padding: 0 .5rem;
+    border-radius: .25rem;
+    width: max-content;
+    font-weight: 700;
+}
+
+a.btn--icon, a.btn{
+    text-decoration: none;
+}
+
+.btn--round{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .5rem;
+    color: var(--on-bg);
+    text-align: center;
+    transition: outline 300ms ease-in;
+}
+
+.btn--round i{
+    background: var(--surface-v);
+    border-radius: 100%;
+    font-size: 1.75rem;
+    padding: .75rem;
+    cursor: pointer;
+}
+.round--primary i{
+    background: var(--primary);
+    color: var(--primary-cont);
+}
+.round--secondary i{
+    background: var(--secondary);
+    color: var(--secondary-cont);
+}
+.round--primary i:hover{
+    outline: .25rem solid var(--primary-cont);
+}
+.round--secondary i:hover{
+    outline: .25rem solid var(--secondary-cont);
+}
+.round--disabled{
+    cursor: not-allowed;
+}
+.round--disabled i{
+    background: var(--outline);
+    color: var(--surface-v);
+    cursor: inherit;
+}
+
+a.btn--round{
+    text-decoration: none;
+    cursor: default;
+}
