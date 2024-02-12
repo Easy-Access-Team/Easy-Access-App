@@ -1,3 +1,4 @@
+@import url(../CSS/M-Layout.css);
 .logo--vertical {
     display: flex;
     flex-direction: column;

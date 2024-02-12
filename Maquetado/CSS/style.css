@@ -1,5 +1,5 @@
-@import url(./components/btn.css);
-@import url(./components/input.css);
+@import url(../CSS/UI/M-Btn.css);
+@import url(../CSS/UI/M-Inputs.css);
 :root{
     font-size: 16px;
     font-family: 'Lato', sans-serif;
