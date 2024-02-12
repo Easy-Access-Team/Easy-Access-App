@@ -1,0 +1,24 @@
+# Logs
+easy-access_app-source/logs
+easy-access_app-source/*.log
+easy-access_app-source/npm-debug.log*
+easy-access_app-source/yarn-debug.log*
+easy-access_app-source/yarn-error.log*
+easy-access_app-source/pnpm-debug.log*
+easy-access_app-source/lerna-debug.log*
+
+easy-access_app-source/node_modules
+easy-access_app-source/dist
+easy-access_app-source/dist-ssr
+easy-access_app-source/*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
