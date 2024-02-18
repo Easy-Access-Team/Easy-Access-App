@@ -1,0 +1,378 @@
+@import url(../CSS/M-Layout.css);
+.flex-column{
+    display: flex;
+    flex-direction: column;
+}
+.presentation{
+    height: auto;
+    background: url(../../img/landing/places-cover.png) center / cover;
+}
+.presentation_content{
+    background: rgba(0, 0, 0, 0.5);
+    padding: 2rem 4rem;
+    color: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+body.dark .presentation_content{
+    color: var(--on-bg);
+}
+.content__text{
+    width: 50%;
+    gap: 2rem;
+    text-shadow: 2px 2px 3px var(--on-primary-cont);
+}
+body.dark .content__text{
+    text-shadow: 2px 2px 3px var(--primary-cont);
+}
+.content__action button{
+    padding: 1rem 2rem;
+}
+.content__img{
+    width: 30%;
+}
+.content__img img{
+    width: 100%;
+}
+
+/* descripcion */
+
+.description{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column-reverse;
+    padding: 2.5rem 0;
+}
+.description__content{
+    width: 60%;
+    text-align: center;
+    gap: .5rem;
+}
+.logo__slogan{
+    align-items: center;
+    justify-content: center;
+    transform: scale(.8);
+}
+
+.logo_slogan_text{
+    text-align: center;
+    color: var(--primary);
+}
+.logo_slogan_text small{
+    color: var(--outline);
+    font-weight: 700;
+}
+.logo__slogan img{
+    width: 20%;
+}
+
+
+/* Clientes */
+.publico{
+    background: var(--secondary);
+    padding-bottom: 2rem;
+}
+.publico__text {
+    text-align: center;
+    padding: 2rem;
+    width: 65%;
+    color: var(--on-secondary);
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+.publico__text:last-child{
+    padding-bottom: 0;
+}
+.publico__text h1{
+    margin-bottom: 1rem;
+}
+.clients{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 2rem;
+    padding: 0 2rem;
+}
+.card__client{
+    flex: 1 1 250px;
+    border: 1px solid var(--outline);
+    border-radius: 1rem;
+    background: var(--bg);
+    transition: all 200ms ease;
+    background: var(--secondary-cont);
+    color: var(--on-secondary-cont);
+}
+.card__client:hover{
+    background: var(--surface-v);
+    box-shadow: 5px 5px 8px 0px rgba(0, 0, 0, 0.2);
+}
+.card_client_cover{
+    background: url(../../img/landing/school.jpeg) center / cover;
+    height: 25vh;
+    position: relative;
+    border-radius: .5rem .5rem 0 0;
+}
+.card_client_cover img{
+    width: 20%;
+    position: absolute;
+    bottom: -1rem;
+    right: -1rem;
+    background: white;
+    border-radius: 100%;
+    transition: padding 200ms ease-in;
+}
+.card_client:hover .cardclient_cover img{
+    padding: .25rem;
+}
+
+.card_client_text{
+    padding: 1rem;
+    gap: .5rem;
+}
+/* Features */
+.features{
+    padding: 2rem 0 0 0;
+}
+.features__text{
+    text-align: center;
+    padding-bottom: 2rem;
+}
+
+.features__list{
+    gap: 1rem;
+}
+.feature{
+    display: flex;
+    flex-wrap: wrap;
+    background: var(--surface-v);
+}
+.feature:nth-child(2), .feature:nth-child(4){
+    flex-direction: row-reverse;
+    background: var(--primary);
+    color: var(--on-primary)
+}
+.feature__img{
+    flex: 1 1 350px;
+    height: 50vh;
+}
+.feature__img img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+.feature__content{
+    flex: 1 1 350px;
+    box-sizing: border-box;
+    padding: 1rem;
+    justify-content: center;
+    gap: 1rem;
+}
+.feature__content h2{
+    font-weight: 300;
+}
+
+.suscripcion{
+    padding: 2rem;
+}
+.suscripcion__text{
+    text-align: center;
+    gap: .5rem;
+}
+.select__suscription{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 0;
+}
+.select__suscription input{
+    display: none;
+}
+.select__suscription label{
+    background: var(--outline);
+    padding: .5rem 2rem;
+    color: var(--surface-v);
+    transition: all 200ms ease-in;
+    cursor: pointer;
+}
+.select__suscription fieldset input:checked ~ label {
+    background: var(--secondary);
+    color: var(--on-secondary);
+}
+
+.suscriptions{
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+.suscription__plan{
+    flex: 0 1 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 3rem 1rem 1rem 1rem;
+    background: var(--surface-v);
+    position: relative;
+}
+.suscription__plan img{
+    width: 5rem;
+    align-self: center;
+    height: 5rem;
+    border-radius: .5rem;
+    outline: 2px solid var(--secondary);
+}
+.suscription__plan h2{
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 700;
+    background: var(--secondary);
+    color: var(--on-secondary);
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+.suscription__plan h1{
+    margin-top: 1.5rem;
+    text-align: center;
+}
+.suscription__plan button{
+    padding: 1rem;
+    width: 100%;
+    justify-content: center;
+}
+.plan__features{
+    display: flex;
+    flex-direction: column;
+}
+.plan__feature{
+    border-top: 1px solid var(--outline);
+    padding: 1rem 0;
+    display: flex;
+    align-items: center;
+}
+.plan__feature i{
+    margin-right: .25rem;
+    color: var(--ok);
+    font-weight: 700;
+    cursor: default;
+}
+.plan__feature span::first-letter{
+    text-transform: uppercase;
+}
+.plan__feature span::after{
+    content: ".";
+}
+/* Footer */
+
+.welcome__footer{
+    background: var(--on-primary-cont);
+    color: var(--on-primary);
+    padding: 2rem;
+}
+.footer__head{
+    display: flex;
+    gap: .5rem;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+.footer__head img{
+    width: 4rem;
+}
+body.dark .welcome__footer{
+    background: var(--on-primary);
+    color: var(--on-primary-cont);
+}
+
+.footer__content{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+}
+.content__column{
+    display: flex;
+    flex: 1 1 200px;
+    flex-direction: column;
+    gap: 1rem;
+}
+.content__column h3{
+    color: var(--primary-cont);
+    font-weight: 700;
+    text-align: center;
+}
+body.dark .content__column h3{
+    color: var(--primary);
+}
+.content__column li{
+    display: flex;
+    transition: all 200ms ease-in;
+}
+.content_column li a, .content_column li span{
+    color: inherit;
+    text-decoration: none;
+    width: 100%;
+    padding: .5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.content__column li:hover{
+    color: var(--tertiary-cont);
+    background: var(--primary);
+    font-weight: 700;
+}
+@media screen and (min-width: 0px) and (max-width: 480px) {
+    .presentation_content{
+        padding: 1rem;
+        flex-direction: column-reverse;
+    }
+    .content__text{
+        width: 100%;
+    }
+    .content__img{
+        width: 50%;
+    }
+    .content__text h1{
+        text-align: center;
+    }
+    .description{
+        padding: 1rem;
+        flex-direction: column;
+    }
+    .description__content{
+        width: 100%;
+    }
+    .publico__text{
+        width: 100%;
+        padding: 1rem;
+    }
+    .card__client{
+        flex-basis: 100%;
+    }
+    .footer__head{
+        flex-direction: column;
+        text-align: center;
+
+    }
+    .footer__content{
+        justify-content: flex-start;
+    }
+    .suscripcion{
+        padding: 1rem;
+    }
+    .select__suscription{
+        position: sticky;
+        top: 0;
+        z-index: 4;
+        background: var(--bg);
+        padding: 1rem 0;
+    }
+}
