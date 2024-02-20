@@ -41,3 +41,51 @@ export const Header = styled.header`
         }
     }
 `;
+
+export const Banner = styled.section`
+    height: auto;
+    background: url(${props => props.url}) center / cover;
+    &.light{
+        div.info{
+            color: ${({theme}) => theme.bg};
+            & div.text{
+                text-shadow: 2px 2px 3px ${({theme}) => theme.onprimarycont};
+            }
+        }
+    }
+    &.dark{
+        div.info{
+            color: ${({theme}) => theme.onbg};
+            & div.text{
+                text-shadow: 2px 2px 3px ${({theme}) => theme.primarycont};
+            }
+        }
+    }
+    & div.info{
+        background: rgba(0, 0, 0, 0.5);
+        padding: 2rem 4rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        @media screen and (min-width: 0px) and (max-width: 480px) {
+            padding: 1rem;
+            flex-direction: column-reverse;
+        }
+
+        & div.text{
+            width: 50%;
+            gap: 2rem;
+            @media screen and (min-width: 0px) and (max-width: 480px) {
+                width:100%;
+                & h1{text-align: center;}
+            }
+        }
+        & div.img{
+            width: 30%;
+            @media screen and (min-width: 0px) and (max-width: 480px) {width:50%}
+            & img{
+                width: 100%;
+            }
+        }
+    }
+`;

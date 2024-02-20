@@ -17,6 +17,7 @@ const Info = styled.div`
 
 const Topbar = () => {
     return <Header>
+        Hola
         <Info>
             <Logo />
         </Info>
