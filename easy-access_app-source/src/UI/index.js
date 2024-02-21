@@ -42,6 +42,23 @@ export const Header = styled.header`
     }
 `;
 
+export const NavHeader = styled.nav`
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    @media screen and (min-width: 0px) and (max-width: 480px) {gap: .5rem;}
+`;
+export const Container = styled.main`
+    color: ${({theme}) => theme.onbg};
+    background: ${({theme}) => theme.bg};
+    min-height: 100%;
+`;
+
+export const FlexColum = styled.div`
+    display: flex;
+    flex-direction: column;
+`;
+
 export const Banner = styled.section`
     height: auto;
     background: url(${props => props.url}) center / cover;
@@ -86,6 +103,20 @@ export const Banner = styled.section`
             & img{
                 width: 100%;
             }
+        }
+    }
+`;
+
+export const LSlogan = styled(FlexColum)`
+    align-items: center;
+    justify-content: center;
+    & img{width: 25%;}
+    & div{
+        text-align: center;
+        color: ${({theme}) => theme.primary};
+        & small{
+            color: ${({theme}) => theme.outline};
+            font-weight: 700;
         }
     }
 `;
