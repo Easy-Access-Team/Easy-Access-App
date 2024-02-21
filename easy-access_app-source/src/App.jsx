@@ -4,11 +4,17 @@ import RouteList from "./components/Routes/Index.jsx"
 
 
 function App() {
+  const [tema, setTema] = useState(localStorage.getItem("theme") === "true")
 
+  const toggleTheme = () => {
+    localStorage.theme = ${ !tema }
+    setTema(!tema)
+  }
   return (
-    <ThemeProvider>
-      <RouteList/>
+    <ThemeProvider theme={tema ? lightTheme : darkTheme}>
+      <RouteList toggleTheme={toggleTheme} />
     </ThemeProvider>
+
   )
 }
 
