@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 import { Header } from "../../UI";
 import Logo from "../Logo/Index";
+import Icon from "../Icon/Index";
 
 const Info = styled.div`
     display: flex;
@@ -15,12 +16,14 @@ const Info = styled.div`
     }
 `;
 
-const Topbar = () => {
+const Topbar = ({ handleSidebar, handleOptions }) => {
     return <Header>
-        Hola
+
         <Info>
+            <Icon onClick={handleSidebar} icon="menu" />
             <Logo />
         </Info>
+        <Icon onClick={handleOptions} icon="more_vert" />
     </Header>
 }
 
