@@ -3,8 +3,8 @@ import { Banner, Container, Header, NavHeader } from "../UI"
 import Logo from "../components/Logo/Index"
 import LogoSlogan from "../components/Logo/LogoSlogan"
 import styled from "styled-components";
-import banner from "../assets/img/landing/places-cover-min.png"
-import qrScan from "../assets/img/landing/qrscan-anim-min.png"
+import banner from "../assets/img/landing/places-cover-min.webp"
+import qrScan from "../assets/img/landing/qrscan-anim-min.webp"
 
 const PageContainer = styled(Container)`
     & .center{
