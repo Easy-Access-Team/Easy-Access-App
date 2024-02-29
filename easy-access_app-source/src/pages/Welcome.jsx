@@ -5,8 +5,10 @@ import LogoSlogan from "../components/Logo/LogoSlogan"
 import styled, { useTheme } from "styled-components";
 import banner from "../assets/img/landing/places-cover-min.webp"
 import qrScan from "../assets/img/landing/qrscan-anim-min.webp"
-import { clients } from "../datoswelcome";
-
+import { clients, features, planes } from "../datoswelcome";
+import Icon from "../components/Icon/Index";
+import Slider from "../components/Slider/Index"
+import { useState } from "react";
 const PageContainer = styled(Container)`
     & .center{
         display: flex;
@@ -72,9 +74,114 @@ const List = styled.ul`
         }
     }
 `;
+const SelectorSuscription = styled.ul`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: .5rem 0;
+
+    position: sticky;
+    top: 4rem;
+    z-index: 1;
+    background: ${({theme}) => theme.bg};
+    & li{
+        background: ${({theme}) => theme.outline};
+        padding: .5rem 2rem;
+        color: ${({theme}) => theme.surfacev};
+        transition: all 200ms ease-in;
+        cursor: pointer;
+        &.selected{
+            background: ${({theme}) => theme.secondary};
+            color: ${({theme}) => theme.onsecondary};
+        }
+    }
+    @media screen and (min-width: 0px) and (max-width: 480px) {top: 3.7rem;}
+`;
+const Planes = styled(List)`
+    gap: 1rem;
+    padding: 2rem 0;
+    & .plan{
+        flex: 0 1 280px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 3rem 1rem 1rem 1rem;
+        background: ${({theme}) => theme.surfacev};
+        position: relative;
+        & h2{
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: 700;
+            background: ${({theme}) => theme.secondary};
+            color: ${({theme}) => theme.onsecondary};
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 1rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        & h1{
+            margin-top: 1.5rem;
+            text-align: center;
+            &::before{
+                content: "$";
+            }
+            & small::before{
+                content: ".00 ";
+            }
+        }
+        & span.message{
+            font-size: 1rem;
+            display: flex;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 200ms ease;
+            color: ${({theme}) => theme.primary};
+            &.visible{
+                opacity: 1;
+                font-weight: 700;
+            }
+        }
+        & img{
+            width: 5rem;
+            align-self: center;
+            height: 5rem;
+            border-radius: .5rem;
+            outline: 2px solid ${({theme}) => theme.secondary};
+        }
+        & ul{
+            display: flex;
+            flex-direction: column;
+            & li{
+                border-top: 1px solid ${({theme}) => theme.outline};
+                padding: 1rem 0;
+                display: flex;
+                align-items: center;
+                & i{
+                    margin-right: .25rem;
+                    color: ${({theme}) => theme.ok};
+                    font-weight: 700;
+                    cursor: default;
+                }
+                & span::first-letter{
+                    text-transform: uppercase;
+                }
+                & span::after{
+                    content: ".";
+                }
+            }
+        }
+    }
+`;
 const Welcome = ({tema, toggleTheme}) => {
     const colors = useTheme()
     const navigate = useNavigate()
+    const [toggle, setToggle] = useState(false)
+    const trigger = () =>{
+        setToggle(!toggle)
+    }
     
     return <>
         <Header>
@@ -134,6 +241,45 @@ const Welcome = ({tema, toggleTheme}) => {
                     </div>
                 </section>
             </SectionBg>
+            <section>
+                <section className="center">
+                    <div className="flex-column description">
+                        <h1>¡Registrate Ya!</h1>
+                        <p>Crea ahora una cuenta en Easy Access y disfruta de las siguientes caracteristicas que ofrece nuestra aplicación.</p>
+                    </div>
+                </section>
+                <Slider datos={features}/>
+            </section>
+            <section>
+                <section className="center">
+                    <div className="flex-column description">
+                        <h1>Gestiona tus instalaciones con Easy Access hoy mismo.</h1>
+                        <span>Contrata uno de nuestros planes que más se ajusten a tus necesidades.</span>
+                    </div>
+                </section>
+                <SelectorSuscription>
+                    <li className={!toggle ? "selected" : ""} onClick={() => {trigger()}}>Mensual</li>
+                    <li className={toggle ? "selected" : ""} onClick={() => {trigger()}}>Anual</li>
+                </SelectorSuscription>
+                <Planes>
+                    {planes.map(plan => 
+                        <li className="plan" key={plan.id}>
+                            <h2>{plan.titulo}</h2>
+                            <div>
+                                <h1>{toggle ? plan.anual : plan.mensual}<small>{plan.moneda}</small></h1>
+                                <span className={`message ${toggle && plan.anual > 0 && "visible"}`}>Ahorra un 15%</span>
+                            </div>
+                            <img src={plan.img} alt="suscripcion icon" />
+                            <ul>
+                                {plan.features.map((feature, i) =>
+                                    <li key={plan.id + i}><Icon icon="check" /><span>{feature.feature}</span></li>
+                                )}
+                            </ul>
+                            <button onClick={() => {navigate("/register")}} >{plan.action}</button>
+                        </li>
+                    )}
+                </Planes>
+            </section>
         </PageContainer>
     </>
 }
