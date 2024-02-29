@@ -5,8 +5,8 @@ import LogoSlogan from "../components/Logo/LogoSlogan"
 import styled, { useTheme } from "styled-components";
 import banner from "../assets/img/landing/places-cover-min.webp"
 import qrScan from "../assets/img/landing/qrscan-anim-min.webp"
-import { clients } from "../datoswelcome";
-
+import { clients, features } from "../datoswelcome";
+import Slider from "../components/Slider/Index"
 const PageContainer = styled(Container)`
     & .center{
         display: flex;
@@ -134,6 +134,15 @@ const Welcome = ({tema, toggleTheme}) => {
                     </div>
                 </section>
             </SectionBg>
+            <section>
+                <section className="center">
+                    <div className="flex-column description">
+                        <h1>¡Registrate Ya!</h1>
+                        <p>Crea ahora una cuenta en Easy Access y disfruta de las siguientes caracteristicas que ofrece nuestra aplicación.</p>
+                    </div>
+                </section>
+                <Slider datos={features}/>
+            </section>
         </PageContainer>
     </>
 }
