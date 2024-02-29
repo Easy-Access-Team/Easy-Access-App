@@ -5,6 +5,7 @@ import LogoSlogan from "../components/Logo/LogoSlogan"
 import styled, { useTheme } from "styled-components";
 import banner from "../assets/img/landing/places-cover-min.webp"
 import qrScan from "../assets/img/landing/qrscan-anim-min.webp"
+import logo from "../assets/img/logo.png"
 import { clients, features, planes } from "../datoswelcome";
 import Icon from "../components/Icon/Index";
 import Slider from "../components/Slider/Index"
@@ -175,6 +176,70 @@ const Planes = styled(List)`
         }
     }
 `;
+const Footer = styled.footer`
+    &.light{
+        background: ${({theme}) => theme.onprimarycont};
+        color: ${({theme}) => theme.onprimary};
+        & section.content div h3{
+            color: ${({theme}) => theme.primarycont};
+        }
+    }
+    &.dark{
+        background: ${({theme}) => theme.onprimary};
+        color: ${({theme}) => theme.onprimarycont};
+        & section.content div h3{
+            color: ${({theme}) => theme.primary};
+        }
+    }
+    padding: 2rem;
+    & section.head{
+        display: flex;
+        gap: .5rem;
+        align-items: center;
+        margin-bottom: 1rem;
+        & img{width: 4rem;}
+        @media screen and (min-width: 0px) and (max-width: 480px) {
+            flex-direction: column;
+            text-align: center;
+        }
+    }
+    & section.content{
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 1rem;
+        & div{
+            display: flex;
+            flex: 1 1 200px;
+            flex-direction: column;
+            gap: 1rem;
+            & h3{
+                font-weight: 700;
+                text-align: center;
+            }
+            & li{
+                display: flex;
+                transition: all 200ms ease-in;
+                & a, & span{
+                    color: inherit;
+                    text-decoration: none;
+                    width: 100%;
+                    padding: .5rem;
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
+                }
+                &:hover{
+                    color: ${({theme}) => theme.tertiarycont};
+                    background:  ${({theme}) => theme.primary};
+                    font-weight: 700;
+                }
+            }
+        }
+        @media screen and (min-width: 0px) and (max-width: 480px) {justify-content: flex-start;}
+    }
+`;
 const Welcome = ({tema, toggleTheme}) => {
     const colors = useTheme()
     const navigate = useNavigate()
@@ -190,6 +255,7 @@ const Welcome = ({tema, toggleTheme}) => {
                 <Link to="/login">Login</Link>
                 <Link to="/register">Register</Link>
                 <Link to="/home">Home</Link>
+                <Icon onClick={()=>{toggleTheme()}} icon={tema ? "light_mode" : "dark_mode"} />
             </NavHeader>
         </Header>
         <PageContainer>
@@ -281,6 +347,38 @@ const Welcome = ({tema, toggleTheme}) => {
                 </Planes>
             </section>
         </PageContainer>
+        <Footer className={tema ? "light" : "dark"}>
+            <section className="head">
+                <img src={logo} alt="" />
+                <h3><b>Easy-Access. © Derechos Reservados 2023</b></h3>
+            </section>
+            <section className="content">
+                <div>
+                    <h3>Soporte</h3>
+                    <ul>
+                        <li><span>Llamanos al 984-231-84-39</span></li>
+                        <li><a href="mailto:oficialcorp.easyaccess@gmail.com">Contactanos por Correo</a></li>
+                        <li><a href="/">Preguntas Frecuentes</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Siguenos</h3>
+                    <ul>
+                        <li><a href="/">Facebook</a></li>
+                        <li><a href="/">Youtube</a></li>
+                        <li><a href="/">Instagram</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Información</h3>
+                    <ul>
+                        <li><a href="/">Terminos y Condiciones</a></li>
+                        <li><a href="/">Aviso de Privacidad</a></li>
+                        <li><a href="/">Mapa de Sitio</a></li>
+                    </ul>
+                </div>
+            </section>
+        </Footer>
     </>
 }
 export default Welcome
