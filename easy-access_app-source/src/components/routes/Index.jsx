@@ -12,7 +12,9 @@ const RouteList = () => {
     localStorage.theme = `${ !tema }`
     setTema(!tema)
   }
+  const [loader, setLoader] = useState("");
   return <ThemeProvider theme={tema ? lightTheme : darkTheme}>
+    <Loader message={loader}/>
     <Router>
       <Routes>
       <Route path="/" element={ <Welcome toggleTheme={toggleTheme} tema={tema} /> }/>
