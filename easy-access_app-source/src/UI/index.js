@@ -18,20 +18,20 @@ export const SLogo = styled.div`
 `;
 
 export const Header = styled.header`
-    background: ${({theme}) => theme.bg};
+    background: ${({ theme }) => theme.bg};
     padding: 1rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 3px solid ${({theme}) => theme.primary};
-    color: ${({theme}) => theme.primary};
+    border-bottom: 3px solid ${({ theme }) => theme.primary};
+    color: ${({ theme }) => theme.primary};
     transition: all 200ms ease-in;
     z-index: 2;
     position: sticky;
     top: 0;
 
     & i:hover{
-        background: ${({theme}) => theme.primarycont};
+        background: ${({ theme }) => theme.primarycont};
         outline-style: solid;
     }
 
@@ -49,8 +49,8 @@ export const NavHeader = styled.nav`
     @media screen and (min-width: 0px) and (max-width: 480px) {gap: .5rem;}
 `;
 export const Container = styled.main`
-    color: ${({theme}) => theme.onbg};
-    background: ${({theme}) => theme.bg};
+    color: ${({ theme }) => theme.onbg};
+    background: ${({ theme }) => theme.bg};
     min-height: 100%;
 `;
 
@@ -64,17 +64,17 @@ export const Banner = styled.section`
     background: url(${props => props.url}) center / cover;
     &.light{
         div.info{
-            color: ${({theme}) => theme.bg};
+            color: ${({ theme }) => theme.bg};
             & div.text{
-                text-shadow: 2px 2px 3px ${({theme}) => theme.onprimarycont};
+                text-shadow: 2px 2px 3px ${({ theme }) => theme.onprimarycont};
             }
         }
     }
     &.dark{
         div.info{
-            color: ${({theme}) => theme.onbg};
+            color: ${({ theme }) => theme.onbg};
             & div.text{
-                text-shadow: 2px 2px 3px ${({theme}) => theme.primarycont};
+                text-shadow: 2px 2px 3px ${({ theme }) => theme.primarycont};
             }
         }
     }
@@ -113,10 +113,20 @@ export const LSlogan = styled(FlexColum)`
     & img{width: 25%;}
     & div{
         text-align: center;
-        color: ${({theme}) => theme.primary};
+        color: ${({ theme }) => theme.primary};
         & small{
-            color: ${({theme}) => theme.outline};
+            color: ${({ theme }) => theme.outline};
             font-weight: 700;
         }
     }
+`;
+
+export const MainContainer = styled.main`
+    min-height: 100vh;
+    padding: 2rem;
+    color: ${({ theme }) => theme.onbg};
+    background: ${({ theme }) => theme.bg};
+    box-sizing: border-box;
+    transition: all 200ms ease-in;
+    @media screen and (min-width: 0px) and (max-width: 480px) {padding: .5rem;}
 `;
