@@ -130,3 +130,9 @@ export const MainContainer = styled.main`
     transition: all 200ms ease-in;
     @media screen and (min-width: 0px) and (max-width: 480px) {padding: .5rem;}
 `;
+export const SectionBg = styled.section`
+    background: ${props => props.bg};
+    color: ${props => props.txt};
+    padding: 0 2rem;
+    @media screen and (min-width: 0px) and (max-width: 480px) {padding: 0 1.5rem;}
+`;
