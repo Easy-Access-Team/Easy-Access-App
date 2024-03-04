@@ -136,3 +136,90 @@ export const SectionBg = styled.section`
     padding: 0 2rem;
     @media screen and (min-width: 0px) and (max-width: 480px) {padding: 0 1.5rem;}
 `;
+export const Field = styled.div`
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    gap: 1rem;
+    & label{font-weight: 700;}
+    &:focus-within label{
+        color: ${({theme}) => theme.primary};
+        transition: all 200ms ease-in;
+    }
+    & small{
+        color: ${({theme}) => theme.error};
+    }
+`;
+export const FieldInput = styled.input`
+    padding: .5rem 1rem;
+    outline: none;
+    font-family: inherit;
+    font-size: 1rem;
+    border: 1px solid ${({theme}) => theme.outline};
+    border-radius: .25rem;
+    background: inherit;
+    color: inherit;
+    caret-color: ${({theme}) => theme.secondary};
+    box-sizing: border-box;
+    &:hover{
+        background: ${({theme}) => theme.surfacev};
+    }
+    &:focus{
+        border-color: ${({theme}) => theme.secondary};
+        outline: 2px solid ${({theme}) => theme.secondarycont};
+    }
+    &[type="checkbox"]{
+        accent-color: ${({theme}) => theme.secondary};
+    }
+    &:-webkit-autofill{
+        -webkit-box-shadow: 0 0 0px 1000px ${({theme}) => theme.bg} inset;
+        -webkit-text-fill-color: ${({theme}) => theme.onbg};
+    }
+    &::placeholder{
+        color: ${({theme}) => theme.onsurfv};
+    }
+    &.error{
+        color: ${({theme}) => theme.error};
+        border-color: ${({theme}) => theme.error};
+        caret-color: ${({theme}) => theme.error};
+        &:focus{
+            outline: 2px solid ${({theme}) => theme.errorcont};
+        }
+        &::placeholder{color: ${({theme}) => theme.error};}
+    }
+`;
+export const FormResponse = styled.small`
+    font-weight: 700; text-align: center; padding: .5rem; border-radius: .5rem;
+    &.error{
+        color: ${({theme}) => theme.error};
+        background-color: ${({theme}) => theme.errorcont};
+    }
+    &.response{
+        color: ${({theme}) => theme.ok};
+        background-color: ${({theme}) => theme.okcont};
+    }
+`;
+export const BaseBtn = styled.button`
+    padding: 1rem 1rem;
+    border-radius: .25rem;
+    background: ${({theme}) => theme.surfacev};
+    transition: all 300ms linear;
+    @media screen and (min-width: 0px) and (max-width: 480px) {padding: .5rem 1rem;}
+    &.primary{
+        background: ${({theme}) => theme.primary};
+        color: ${({theme}) => theme.onprimary};
+        &:hover{
+            outline: 1px solid ${({theme}) => theme.primary};
+            color: ${({theme}) => theme.onprimarycont};
+            background: ${({theme}) => theme.primarycont};
+        }
+    }
+    &.icon{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: .5rem;
+        font-weight: 700;
+        & i{pointer-events: none;}
+    }
+`;
