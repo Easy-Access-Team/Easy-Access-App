@@ -9,7 +9,7 @@ import logo from "../assets/img/logo.png"
 import { clients, features, planes } from "../datoswelcome";
 import Icon from "../components/Icon/Index";
 import Slider from "../components/Slider/Index"
-import { useState } from "react";
+import useToggle from "../hooks/useToggle"
 const PageContainer = styled(Container)`
     & .center{
         display: flex;
@@ -243,10 +243,7 @@ const Footer = styled.footer`
 const Welcome = ({tema, toggleTheme}) => {
     const colors = useTheme()
     const navigate = useNavigate()
-    const [toggle, setToggle] = useState(false)
-    const trigger = () =>{
-        setToggle(!toggle)
-    }
+    const {toggle, trigger} = useToggle()
     
     return <>
         <Header>
