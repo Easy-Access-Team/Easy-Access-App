@@ -8,7 +8,6 @@ export const validateEmail = (value) => {
     }
 }
 
-
 export const validatePass = (value) => {
     const pat = /^(?=.[A-Z])(?=.[a-z])(?=.[0-9])(?=.[@#$%&/])[A-Za-z0-9@#$%&/]{8,12}$/;
     if(pat.test(value)){
