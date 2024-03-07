@@ -15,3 +15,4 @@ export const validatePass = (value) => {
         return {fail: true, description: "Se requiere: Minimo una Mayúscula, una Minúscula y un Número con al menos uno de estos caracteres @#$%& y una logitud de 8 a 12 caracteres."}
     }
 }
+
