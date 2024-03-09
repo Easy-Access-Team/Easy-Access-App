@@ -51,7 +51,7 @@ const Login = () => {
                             <InputPass {...pass} label="Contraseña" id="contra" placeholder="Escribe tu contraseña" />
                             <small><Link to="/forgot-password">Olvidé mi contraseña</Link></small>
                         </FormFields>
-
+                        <Btn colors="primary" action="Iniciar Sesión" />
                         <span>¿No tienes cuenta? <Link to="/register">Registrate aquí</Link>.</span>
                     </form>
                 </SignIUCardRight>
