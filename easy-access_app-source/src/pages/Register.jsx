@@ -64,8 +64,9 @@ const Register = () => {
                             <InputPass confirm={pass.value} {...passconf} label="Confirmar Contraseña" id="contraC" placeholder="Confirma la contraseña" />
                             <InputCheck {...terms} id="terms" label="He leído y acepto los términos y condiciones." />
                         </FormFields>
-
+                        <Btn colors="primary" action="Crear Cuenta" />
                         <span>¿Ya tienes cuenta? <Link to="/login">Inicia sesión aquí</Link>.</span>
+                        
                     </form>
                 </SignIUCardRight>
             </SignIUCard>
