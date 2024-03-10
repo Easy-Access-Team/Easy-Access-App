@@ -2,8 +2,8 @@ import { SignIUContainer, Header, NavHeader, SignIUCard, SignIUCardLeft, SignIUC
 import Logo from "../components/Logo/Index";
 import LogoSlogan from "../components/Logo/LogoSlogan";
 import Input from "../components/Form/Input";
-import InputPass from "../components/Form/InputPass";
-import InputCheck from "../components/Form/InputCheck";
+import Password from "../components/Form/Password";
+import Checkbox from "../components/Form/Checkbox";
 import Btn from "../components/Button/Index";
 import Icon from "../components/Icon/Index";
 import signInUp from "../assets/img/landing/signInUp.webp"
@@ -12,7 +12,7 @@ import { validateNameApellidos, validateEmail, validatePass, validatePassconf, v
 import useInput from "../hooks/useInput";
 import useFormResponse from "../hooks/useFormResponse";
 
-const Register = () => {
+const Register = ({toggleTheme, action, tema}) => {
     const name = useInput("text", validateNameApellidos)
     const apellidos = useInput("text", validateNameApellidos)
     const email = useInput("email", validateEmail)
@@ -26,7 +26,7 @@ const Register = () => {
                 <Logo />
                 <NavHeader>
                     <Link to="/login">Login</Link>
-                    <Icon onClick={() => { toggleTheme() }} icon={tema ? "light_mode" : "dark_mode"} />
+                    <Icon onClick={toggleTheme} icon={tema ? "light_mode" : "dark_mode"} />
                 </NavHeader>
             </Header>
             <SignIUCard>
@@ -49,7 +49,9 @@ const Register = () => {
                         passconf.validate(passconf.value, pass.value)
                         terms.validate(terms.value)
                         if (name.valid && apellidos.valid && email.valid && pass.valid && passconf.valid && terms.valid) {
-                            console.log(name.value, apellidos.value, email.value, pass.value)
+                            action(name.value, apellidos.value, email.value, pass.value).catch((error)=>{
+                                showResponseError(error.code)
+                            })
                         }
                     }}>
                         <legend><h1>Crear Cuenta</h1></legend>
@@ -60,9 +62,9 @@ const Register = () => {
                                 <Input {...apellidos} label="Apellidos" id="apellidos" placeholder="Escribe tus apellidos" />
                             </InputColum>
                             <Input {...email} label="Correo" id="correo" placeholder="Escribe tu correo electronico" />
-                            <InputPass {...pass} label="Contraseña" id="contra" placeholder="Escribe una contraseña" />
-                            <InputPass confirm={pass.value} {...passconf} label="Confirmar Contraseña" id="contraC" placeholder="Confirma la contraseña" />
-                            <InputCheck {...terms} id="terms" label="He leído y acepto los términos y condiciones." />
+                            <Password {...pass} label="Contraseña" id="contra" placeholder="Escribe una contraseña" />
+                            <Password confirm={pass.value} {...passconf} label="Confirmar Contraseña" id="contraC" placeholder="Confirma la contraseña" />
+                            <Checkbox {...terms} id="terms" label="He leído y acepto los términos y condiciones." />
                         </FormFields>
                         <Btn colors="primary" action="Crear Cuenta" />
                         <span>¿Ya tienes cuenta? <Link to="/login">Inicia sesión aquí</Link>.</span>

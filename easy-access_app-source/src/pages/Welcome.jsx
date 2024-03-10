@@ -10,6 +10,7 @@ import { clients, features, planes } from "../datoswelcome";
 import Icon from "../components/Icon/Index";
 import Slider from "../components/Slider/Index"
 import useToggle from "../hooks/useToggle"
+import Btn from "../components/Button/Index";
 const PageContainer = styled(Container)`
     & .center{
         display: flex;
@@ -252,7 +253,7 @@ const Welcome = ({tema, toggleTheme}) => {
                 <Link to="/login">Login</Link>
                 <Link to="/register">Register</Link>
                 <Link to="/home">Home</Link>
-                <Icon onClick={()=>{toggleTheme()}} icon={tema ? "light_mode" : "dark_mode"} />
+                <Icon onClick={toggleTheme} icon={tema ? "light_mode" : "dark_mode"} />
             </NavHeader>
         </Header>
         <PageContainer>
@@ -262,7 +263,7 @@ const Welcome = ({tema, toggleTheme}) => {
                         <h1><b>Accede a tus lugares importantes con solo mostrar un código QR</b></h1>
                         <h3>¡Se acabaron las demoras! no más listas, no más registros. Con Easy Access el acceso es facil y seguro.</h3>
                         <div>
-                            <button onClick={() => {navigate("/register")}}>Comenzar</button>
+                            <Btn action="Comenzar" colors="primary" onClick={() => {navigate("/register")}}/>
                         </div>
                     </div>
                     <div className="img">
@@ -338,7 +339,7 @@ const Welcome = ({tema, toggleTheme}) => {
                                     <li key={plan.id + i}><Icon icon="check" /><span>{feature.feature}</span></li>
                                 )}
                             </ul>
-                            <button onClick={() => {navigate("/register")}} >{plan.action}</button>
+                            <Btn action={plan.action} colors="primary" type="icon" icon={plan.icon} onClick={() => {navigate("/register")}} />
                         </li>
                     )}
                 </Planes>

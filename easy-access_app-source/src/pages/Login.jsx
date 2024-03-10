@@ -2,7 +2,7 @@ import { SignIUContainer, Header, NavHeader, SignIUCard, SignIUCardLeft, SignIUC
 import Logo from "../components/Logo/Index";
 import LogoSlogan from "../components/Logo/LogoSlogan";
 import Input from "../components/Form/Input";
-import InputPass from "../components/Form/InputPass";
+import Password from "../components/Form/Password";
 import Btn from "../components/Button/Index";
 import Icon from "../components/Icon/Index";
 import { Link } from "react-router-dom";
@@ -11,7 +11,7 @@ import signInUp from "../assets/img/landing/signInUp.webp"
 import useInput from "../hooks/useInput";
 import useFormResponse from "../hooks/useFormResponse";
 
-const Login = () => {
+const Login = ({toggleTheme, action, tema}) => {
     const email = useInput("email", validateEmail)
     const pass = useInput("password", validatePass)
     const { response, type, showResponseError } = useFormResponse();
@@ -22,7 +22,7 @@ const Login = () => {
                 <Logo />
                 <NavHeader>
                     <Link to="/register">Register</Link>
-                    <Icon onClick={() => { toggleTheme() }} icon={tema ? "light_mode" : "dark_mode"} />
+                    <Icon onClick={toggleTheme} icon={tema ? "light_mode" : "dark_mode"} />
                 </NavHeader>
             </Header>
             <SignIUCard>
@@ -41,14 +41,16 @@ const Login = () => {
                         email.validate(email.value)
                         pass.validate(pass.value)
                         if (email.valid && pass.valid) {
-                            console.log(email.value, pass.value)
+                            action(email.value, pass.value).catch((error)=>{
+                                showResponseError(error.code)
+                            })
                         }
                     }}>
                         <legend><h1>Iniciar Sesión</h1></legend>
                         <FormResponse className={type}>{response}</FormResponse>
                         <FormFields>
                             <Input {...email} label="Correo" id="correo" placeholder="Escribe tu correo electronico" />
-                            <InputPass {...pass} label="Contraseña" id="contra" placeholder="Escribe tu contraseña" />
+                            <Password {...pass} label="Contraseña" id="contra" placeholder="Escribe tu contraseña" />
                             <small><Link to="/forgot-password">Olvidé mi contraseña</Link></small>
                         </FormFields>
                         <Btn colors="primary" action="Iniciar Sesión" />

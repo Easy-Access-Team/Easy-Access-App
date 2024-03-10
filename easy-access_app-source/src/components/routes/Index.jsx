@@ -1,26 +1,33 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Welcome from "../../pages/Welcome";
+import Login from "../../pages/Login";
+import Register from "../../pages/Register";
 
 import { ThemeProvider } from "styled-components"
 import { lightTheme, darkTheme } from "../../UI/themes";
 
 import { useState } from "react";
+import Loader from "../Loader/Index";
+import useAuth from "../../hooks/useAuth";
+
 
 const RouteList = () => {
+  const [loader, setLoader] = useState("");
+  const { login, signUp, user, auth } = useAuth(setLoader)
   const [tema, setTema] = useState(true)
   const toggleTheme = () => {
     localStorage.theme = `${ !tema }`
     setTema(!tema)
   }
-  const [loader, setLoader] = useState("");
   return <ThemeProvider theme={tema ? lightTheme : darkTheme}>
     <Loader message={loader}/>
+    {user && user.email}
     <Router>
       <Routes>
-      <Route path="/" element={ <Welcome toggleTheme={toggleTheme} tema={tema} /> }/>
-        {/* <Route path="/login" element={ <Login/> } />
-        <Route path="/register" element={<Register/>}/> 
-        <Route path="/home" element={<Home/> } />
+        <Route path="/" element={ <Welcome toggleTheme={toggleTheme} tema={tema} /> }/>
+        <Route path="/login" element={ <Login action={login} toggleTheme={toggleTheme} tema={tema}/> } />
+        <Route path="/register" element={<Register action={signUp} toggleTheme={toggleTheme} tema={tema}/>}/> 
+        {/* <Route path="/home" element={<Home/> } />
         <Route path="/asignaciones" element={<Asignaciones/>}/>
         <Route path="*" element={<Error404/>}/> */}
       </Routes>
