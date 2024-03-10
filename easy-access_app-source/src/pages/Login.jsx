@@ -11,7 +11,7 @@ import signInUp from "../assets/img/landing/signInUp.webp"
 import useInput from "../hooks/useInput";
 import useFormResponse from "../hooks/useFormResponse";
 
-const Login = ({toggleTheme, action, tema}) => {
+const Login = ({toggleTheme, action, tema, google}) => {
     const email = useInput("email", validateEmail)
     const pass = useInput("password", validatePass)
     const { response, type, showResponseError } = useFormResponse();
@@ -56,6 +56,13 @@ const Login = ({toggleTheme, action, tema}) => {
                         <Btn colors="primary" action="Iniciar Sesión" />
                         <span>¿No tienes cuenta? <Link to="/register">Registrate aquí</Link>.</span>
                     </form>
+                    <Btn action="Iniciar sesión con Google" colors="primary" type="icon" icon="login" 
+                        click={() => {
+                            google().catch((error)=>{
+                                showResponseError(authErrors[error.code])
+                            })
+                        }}
+                    />
                 </SignIUCardRight>
             </SignIUCard>
             <SignIUFooter><h4>Easy-Access. © Derechos Reservados 2023</h4></SignIUFooter>
