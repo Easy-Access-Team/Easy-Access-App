@@ -26,7 +26,7 @@ const RouteList = () => {
       <Routes>
         <Route path="/" element={ <Welcome toggleTheme={toggleTheme} tema={tema} /> }/>
         <Route path="/login" element={ <Login action={login} toggleTheme={toggleTheme} tema={tema}/> } />
-        <Route path="/register" element={<Register action={signUp} toggleTheme={toggleTheme} tema={tema}/>}/> 
+        <Route path="/register" element={<Register action={signUp} toggleTheme={toggleTheme} tema={tema} auth={auth}/>}/> 
         {/* <Route path="/home" element={<Home/> } />
         <Route path="/asignaciones" element={<Asignaciones/>}/>
         <Route path="*" element={<Error404/>}/> */}

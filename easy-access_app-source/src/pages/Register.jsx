@@ -12,7 +12,7 @@ import { validateNameApellidos, validateEmail, validatePass, validatePassconf, v
 import useInput from "../hooks/useInput";
 import useFormResponse from "../hooks/useFormResponse";
 
-const Register = ({toggleTheme, action, tema}) => {
+const Register = ({toggleTheme, action, tema, auth}) => {
     const name = useInput("text", validateNameApellidos)
     const apellidos = useInput("text", validateNameApellidos)
     const email = useInput("email", validateEmail)
@@ -20,6 +20,9 @@ const Register = ({toggleTheme, action, tema}) => {
     const passconf = useInput("password", validatePassconf)
     const terms = useInput("checkbox", validateTerms)
     const { response, type, showResponseError } = useFormResponse();
+    if(auth){
+        return <Navigate to="/home"/>
+    }
     return <>
         <SignIUContainer>
             <Header>
