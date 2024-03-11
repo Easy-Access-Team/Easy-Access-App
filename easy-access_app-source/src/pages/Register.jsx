@@ -13,7 +13,7 @@ import useInput from "../hooks/useInput";
 import useFormResponse from "../hooks/useFormResponse";
 import { authErrors } from "../firebase.errors";
 
-const Register = ({ toggleTheme, action, tema, auth, google, loginWithMicrosoft }) => {
+const Register = ({ toggleTheme, action, tema, auth, google, facebook, microsoft}) => {
     const name = useInput("text", validateNameApellidos)
     const apellidos = useInput("text", validateNameApellidos)
     const email = useInput("email", validateEmail)
@@ -80,10 +80,17 @@ const Register = ({ toggleTheme, action, tema, auth, google, loginWithMicrosoft 
                             })
                         }}
                     />
+                    <Btn action="Iniciar sesión con Facebook" colors="primary" type="icon" icon="login"
+                        click={()=>{
+                            facebook().catch((error)=>{
+                                showResponseError(authErrors[error.code] || authErrors.defaulError)
+                            })
+                        }}
+                    />
                     <Btn action="Iniciar sesión con Microsoft" colors="primary" type="icon" icon="login"
                         click={() => {
-                            loginWithMicrosoft().catch((error) => {
-                                showResponseError(authErrors[error.code])
+                            microsoft().catch((error) => {
+                                showResponseError(authErrors[error.code] || authErrors.defaulError)
                             })
                         }}
                     />
