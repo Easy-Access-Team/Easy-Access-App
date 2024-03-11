@@ -1,6 +1,6 @@
 import { useLayoutEffect, useState } from "react";
 import { firebaseAuth } from "../firebase";
-import { signInWithEmailAndPassword, sendEmailVerification, createUserWithEmailAndPassword, onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { signInWithEmailAndPassword, sendEmailVerification, createUserWithEmailAndPassword, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider } from "firebase/auth";
 const useAuth = (setLoader) => {
     const [user,setUser] = useState(null)
     const [auth, setAuth] = useState(false)
@@ -32,6 +32,13 @@ const useAuth = (setLoader) => {
             setLoader("")
         });
     }
+    const loginWithFacebook = async() => {
+        setLoader("Iniciando Sesión")
+        const facebookProvider = new FacebookAuthProvider()
+        return signInWithPopup(firebaseAuth, facebookProvider).finally(()=>{
+            setLoader("")
+        });
+    }
     useLayoutEffect(()=>{
         const unsubscribe = onAuthStateChanged(firebaseAuth, async(currentUser) => {
             setUser(currentUser)
@@ -48,7 +55,8 @@ const useAuth = (setLoader) => {
         auth,
         login,
         signUp,
-        loginWithGoogle
+        loginWithGoogle,
+        loginWithFacebook
     }
 }
 export default useAuth
