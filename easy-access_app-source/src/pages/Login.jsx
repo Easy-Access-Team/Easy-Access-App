@@ -10,8 +10,9 @@ import { validateEmail, validatePass } from "../validations";
 import signInUp from "../assets/img/landing/signInUp.webp"
 import useInput from "../hooks/useInput";
 import useFormResponse from "../hooks/useFormResponse";
+import { authErrors } from "../firebase.errors";
 
-const Login = ({toggleTheme, action, tema, google, auth}) => {
+const Login = ({toggleTheme, action, tema, google, facebook, auth}) => {
     const email = useInput("email", validateEmail)
     const pass = useInput("password", validatePass)
     const { response, type, showResponseError } = useFormResponse();
@@ -44,7 +45,7 @@ const Login = ({toggleTheme, action, tema, google, auth}) => {
                         pass.validate(pass.value)
                         if (email.valid && pass.valid) {
                             action(email.value, pass.value).catch((error)=>{
-                                showResponseError(error.code)
+                                showResponseError(authErrors[error.code]  || authErrors.defaulError)
                             })
                         }
                     }}>
@@ -59,9 +60,16 @@ const Login = ({toggleTheme, action, tema, google, auth}) => {
                         <span>¿No tienes cuenta? <Link to="/register">Registrate aquí</Link>.</span>
                     </form>
                     <Btn action="Iniciar sesión con Google" colors="primary" type="icon" icon="login" 
-                        click={() => {
+                        onClick={() => {
                             google().catch((error)=>{
-                                showResponseError(authErrors[error.code])
+                                showResponseError(authErrors[error.code] || authErrors.defaulError)
+                            })
+                        }}
+                    />
+                    <Btn action="Iniciar sesión con Facebook" colors="primary" type="icon" icon="login"
+                        onClick={()=>{
+                            facebook().catch((error)=>{
+                                showResponseError(authErrors[error.code] || authErrors.defaulError)
                             })
                         }}
                     />

@@ -13,7 +13,7 @@ import useAuth from "../../hooks/useAuth";
 
 const RouteList = () => {
   const [loader, setLoader] = useState("");
-  const { login, signUp, loginWithGoogle, user, auth } = useAuth(setLoader)
+  const { login, signUp, loginWithGoogle, loginWithFacebook, user, auth } = useAuth(setLoader)
   const [tema, setTema] = useState(true)
   const toggleTheme = () => {
     localStorage.theme = `${ !tema }`
@@ -25,8 +25,8 @@ const RouteList = () => {
     <Router>
       <Routes>
         <Route path="/" element={ <Welcome toggleTheme={toggleTheme} tema={tema} /> }/>
-        <Route path="/login" element={ <Login action={login} auth={auth} toggleTheme={toggleTheme} google={loginWithGoogle} tema={tema}/> } />
-        <Route path="/register" element={<Register action={signUp} toggleTheme={toggleTheme} tema={tema} auth={auth}/>}/> 
+        <Route path="/login" element={ <Login action={login} auth={auth} toggleTheme={toggleTheme} google={loginWithGoogle} facebook={loginWithFacebook} tema={tema}/> } />
+        <Route path="/register" element={<Register action={signUp} google={loginWithGoogle} toggleTheme={toggleTheme} tema={tema} auth={auth}/>}/> 
         {/* <Route path="/home" element={<Home/> } />
         <Route path="/asignaciones" element={<Asignaciones/>}/>
         <Route path="*" element={<Error404/>}/> */}

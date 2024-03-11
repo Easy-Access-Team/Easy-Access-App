@@ -11,8 +11,9 @@ import { Link } from "react-router-dom";
 import { validateNameApellidos, validateEmail, validatePass, validatePassconf, validateTerms } from "../validations";
 import useInput from "../hooks/useInput";
 import useFormResponse from "../hooks/useFormResponse";
+import { authErrors } from "../firebase.errors";
 
-const Register = ({ toggleTheme, action, tema, auth, loginWithGoogle }) => {
+const Register = ({ toggleTheme, action, tema, auth, google }) => {
     const name = useInput("text", validateNameApellidos)
     const apellidos = useInput("text", validateNameApellidos)
     const email = useInput("email", validateEmail)
@@ -53,7 +54,7 @@ const Register = ({ toggleTheme, action, tema, auth, loginWithGoogle }) => {
                         terms.validate(terms.value)
                         if (name.valid && apellidos.valid && email.valid && pass.valid && passconf.valid && terms.valid) {
                             action(name.value, apellidos.value, email.value, pass.value).catch((error)=>{
-                                showResponseError(error.code)
+                                showResponseError(authErrors[error.code]  || authErrors.defaulError)
                             })
                         }
                     }}>
@@ -73,9 +74,9 @@ const Register = ({ toggleTheme, action, tema, auth, loginWithGoogle }) => {
                         <span>¿Ya tienes cuenta? <Link to="/login">Inicia sesión aquí</Link>.</span>
                        </form>
                     <Btn action="Iniciar sesión con Google" colors="primary" type="icon" icon="login"
-                        click={() => {
+                        onClick={() => {
                             google().catch((error) => {
-                                showResponseError(authErrors[error.code])
+                                showResponseError(authErrors[error.code]  || authErrors.defaulError)
                             })
                         }}
                     />
