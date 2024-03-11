@@ -12,7 +12,7 @@ import { validateNameApellidos, validateEmail, validatePass, validatePassconf, v
 import useInput from "../hooks/useInput";
 import useFormResponse from "../hooks/useFormResponse";
 
-const Register = ({toggleTheme, action, tema, auth,google}) => {
+const Register = ({ toggleTheme, action, tema, auth, loginWithGoogle }) => {
     const name = useInput("text", validateNameApellidos)
     const apellidos = useInput("text", validateNameApellidos)
     const email = useInput("email", validateEmail)
