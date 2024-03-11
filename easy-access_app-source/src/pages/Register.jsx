@@ -12,7 +12,7 @@ import { validateNameApellidos, validateEmail, validatePass, validatePassconf, v
 import useInput from "../hooks/useInput";
 import useFormResponse from "../hooks/useFormResponse";
 
-const Register = ({toggleTheme, action, tema}) => {
+const Register = ({ toggleTheme, action, tema, auth, loginWithGoogle }) => {
     const name = useInput("text", validateNameApellidos)
     const apellidos = useInput("text", validateNameApellidos)
     const email = useInput("email", validateEmail)
@@ -20,6 +20,9 @@ const Register = ({toggleTheme, action, tema}) => {
     const passconf = useInput("password", validatePassconf)
     const terms = useInput("checkbox", validateTerms)
     const { response, type, showResponseError } = useFormResponse();
+    if(auth){
+        return <Navigate to="/home"/>
+    }
     return <>
         <SignIUContainer>
             <Header>
@@ -68,8 +71,14 @@ const Register = ({toggleTheme, action, tema}) => {
                         </FormFields>
                         <Btn colors="primary" action="Crear Cuenta" />
                         <span>¿Ya tienes cuenta? <Link to="/login">Inicia sesión aquí</Link>.</span>
-                        
-                    </form>
+                       </form>
+                    <Btn action="Iniciar sesión con Google" colors="primary" type="icon" icon="login"
+                        click={() => {
+                            google().catch((error) => {
+                                showResponseError(authErrors[error.code])
+                            })
+                        }}
+                    />
                 </SignIUCardRight>
             </SignIUCard>
             <SignIUFooter><h4>Easy-Access. © Derechos Reservados 2023</h4></SignIUFooter>
