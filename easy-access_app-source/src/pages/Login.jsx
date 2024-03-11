@@ -5,17 +5,19 @@ import Input from "../components/Form/Input";
 import Password from "../components/Form/Password";
 import Btn from "../components/Button/Index";
 import Icon from "../components/Icon/Index";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { validateEmail, validatePass } from "../validations";
 import signInUp from "../assets/img/landing/signInUp.webp"
 import useInput from "../hooks/useInput";
 import useFormResponse from "../hooks/useFormResponse";
 
-const Login = ({toggleTheme, action, tema}) => {
+const Login = ({toggleTheme, action, tema, auth}) => {
     const email = useInput("email", validateEmail)
     const pass = useInput("password", validatePass)
     const { response, type, showResponseError } = useFormResponse();
-
+    if(auth){
+        return <Navigate to="/home"/>
+    }
     return <>
         <SignIUContainer>
             <Header>
