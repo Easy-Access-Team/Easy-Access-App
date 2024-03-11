@@ -1,6 +1,6 @@
 import { useLayoutEffect, useState } from "react";
 import { firebaseAuth } from "../firebase";
-import { signInWithEmailAndPassword, sendEmailVerification, createUserWithEmailAndPassword, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider } from "firebase/auth";
+import { signInWithEmailAndPassword, sendEmailVerification, createUserWithEmailAndPassword, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider, OAuthProvider} from "firebase/auth";
 const useAuth = (setLoader) => {
     const [user,setUser] = useState(null)
     const [auth, setAuth] = useState(false)
@@ -39,6 +39,13 @@ const useAuth = (setLoader) => {
             setLoader("")
         });
     }
+    const loginWithMicrosoft = async() => {
+        setLoader("Iniciando Sesión")
+        const microsoftProvider = new OAuthProvider('microsoft.com')
+        return signInWithPopup(firebaseAuth, microsoftProvider).finally(()=>{
+            setLoader("")
+        });
+    }
     useLayoutEffect(()=>{
         const unsubscribe = onAuthStateChanged(firebaseAuth, async(currentUser) => {
             setUser(currentUser)
@@ -56,7 +63,8 @@ const useAuth = (setLoader) => {
         login,
         signUp,
         loginWithGoogle,
-        loginWithFacebook
+        loginWithFacebook,
+        loginWithMicrosoft
     }
 }
 export default useAuth
