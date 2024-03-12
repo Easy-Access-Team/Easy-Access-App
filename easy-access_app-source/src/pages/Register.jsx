@@ -7,7 +7,7 @@ import Checkbox from "../components/Form/Checkbox";
 import Btn from "../components/Button/Index";
 import Icon from "../components/Icon/Index";
 import signInUp from "../assets/img/landing/signInUp.webp"
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { validateNameApellidos, validateEmail, validatePass, validatePassconf, validateTerms } from "../validations";
 import useInput from "../hooks/useInput";
 import useFormResponse from "../hooks/useFormResponse";
@@ -88,7 +88,7 @@ const Register = ({ toggleTheme, action, tema, auth, google, facebook, microsoft
                         }}
                     />
                     <Btn action="Iniciar sesión con Microsoft" colors="primary" type="icon" icon="login"
-                        click={() => {
+                        onClick={() => {
                             microsoft().catch((error) => {
                                 showResponseError(authErrors[error.code] || authErrors.defaulError)
                             })
