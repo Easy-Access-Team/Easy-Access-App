@@ -12,7 +12,7 @@ import useInput from "../hooks/useInput";
 import useFormResponse from "../hooks/useFormResponse";
 import { authErrors } from "../firebase.errors";
 
-const Login = ({toggleTheme, action, tema, google, facebook, loginWithMicrosoft, auth}) => {
+const Login = ({toggleTheme, action, tema, google, facebook, microsoft, auth}) => {
     const email = useInput("email", validateEmail)
     const pass = useInput("password", validatePass)
     const { response, type, showResponseError } = useFormResponse();
@@ -74,9 +74,9 @@ const Login = ({toggleTheme, action, tema, google, facebook, loginWithMicrosoft,
                         }}
                     />
                     <Btn action="Iniciar sesión con Microsoft" colors="primary" type="icon" icon="login"
-                        click={()=>{
-                            loginWithMicrosoft().catch((error)=>{
-                                showResponseError(authErrors[error.code])
+                        onClick={()=>{
+                            microsoft().catch((error)=>{
+                                showResponseError(authErrors[error.code] || authErrors.defaulError)
                             })
                         }}
                     />
