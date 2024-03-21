@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Welcome from "../../pages/Welcome";
 import Login from "../../pages/Login";
 import Register from "../../pages/Register";
+import Home from "../../pages/Home";
 
 import { ThemeProvider } from "styled-components"
 import { lightTheme, darkTheme } from "../../UI/themes";
