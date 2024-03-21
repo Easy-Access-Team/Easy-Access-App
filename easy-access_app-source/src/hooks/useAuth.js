@@ -1,6 +1,6 @@
 import { useLayoutEffect, useState } from "react";
 import { firebaseAuth } from "../firebase";
-import { signInWithEmailAndPassword, sendEmailVerification, createUserWithEmailAndPassword, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider, OAuthProvider} from "firebase/auth";
+import { signInWithEmailAndPassword, sendEmailVerification, createUserWithEmailAndPassword, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider, OAuthProvider, signOut} from "firebase/auth";
 const useAuth = (setLoader) => {
     const [user,setUser] = useState(null)
     const [auth, setAuth] = useState(false)
@@ -46,6 +46,14 @@ const useAuth = (setLoader) => {
             setLoader("")
         });
     }
+    const logout = () => {
+        setLoader("Cerrando Sesion")
+        signOut(firebaseAuth).catch((e)=>{
+            console.log(e)
+        }).finally(()=>{
+            setLoader("")
+        })
+    }
     useLayoutEffect(()=>{
         const unsubscribe = onAuthStateChanged(firebaseAuth, async(currentUser) => {
             setUser(currentUser)
@@ -64,7 +72,8 @@ const useAuth = (setLoader) => {
         signUp,
         loginWithGoogle,
         loginWithFacebook,
-        loginWithMicrosoft
+        loginWithMicrosoft,
+        logout
     }
 }
 export default useAuth

@@ -3,6 +3,7 @@ import Icon from "../Icon/Index";
 import logohorizontal from "../../assets/img/logo_horizontal.png"
 import { NavLink } from "react-router-dom";
 import { useRef, useLayoutEffect } from "react";
+import useAuth from "../../hooks/useAuth";
 
 const AsideContainer = styled.dialog`
     background: ${({ theme }) => theme.bg};
@@ -167,6 +168,7 @@ const Logo = styled.div`
 
 const Sidebar = ({ handleSidebar, show }) => {
     const sidebarRef = useRef(null)
+    const {logout} = useAuth()
 
     useLayoutEffect(() => {
         const handle = () => {
@@ -217,7 +219,7 @@ const Sidebar = ({ handleSidebar, show }) => {
                     <NavTab to="/" > Suscripción <Icon icon="credit_card" /></NavTab>
                     <NavBtn onClick={() => {
                         handleSidebar();
-                        console.log("Cerrando sesion")
+                        logout()
                     }}>
                         Cerrar Sesión
                         <Icon icon="logout" />
