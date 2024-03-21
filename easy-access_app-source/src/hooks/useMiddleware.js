@@ -1,5 +1,7 @@
+import useAppContext from "./useAppContext"
+
 const useMiddleware = () => {
-    const { auth, user } = useAuth()
+    const { auth, user } = useAppContext()
     const loginM = {
         redirect: "/home",
         validacion: auth

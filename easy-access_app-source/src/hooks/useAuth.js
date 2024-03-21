@@ -1,9 +1,8 @@
-import { useLayoutEffect, useState } from "react";
 import { firebaseAuth } from "../firebase";
-import { signInWithEmailAndPassword, sendEmailVerification, createUserWithEmailAndPassword, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider, OAuthProvider, signOut} from "firebase/auth";
-const useAuth = (setLoader) => {
-    const [user,setUser] = useState(null)
-    const [auth, setAuth] = useState(false)
+import { signInWithEmailAndPassword, sendEmailVerification, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider, OAuthProvider, signOut} from "firebase/auth";
+import useAppContext from "./useAppContext";
+const useAuth = () => {
+    const {setLoader} = useAppContext()
     const login = async(email, password) => {
         setLoader("Iniciando Sesión")
         return signInWithEmailAndPassword(firebaseAuth, email, password).finally(()=>{
@@ -54,20 +53,7 @@ const useAuth = (setLoader) => {
             setLoader("")
         })
     }
-    useLayoutEffect(()=>{
-        const unsubscribe = onAuthStateChanged(firebaseAuth, async(currentUser) => {
-            setUser(currentUser)
-            if(currentUser === null){
-                setAuth(false)
-            }else{
-                setAuth(true)
-            }
-        });
-        return () => unsubscribe();
-    },[user])
     return {
-        user,
-        auth,
         login,
         signUp,
         loginWithGoogle,
