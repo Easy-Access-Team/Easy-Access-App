@@ -11,15 +11,16 @@ import signInUp from "../assets/img/landing/signInUp.webp"
 import useInput from "../hooks/useInput";
 import useFormResponse from "../hooks/useFormResponse";
 import { authErrors } from "../firebase.errors";
+import useMiddleware from "../hooks/useMiddleware";
+import Middleware from "../components/Middleware/Index";
 
 const Login = ({toggleTheme, action, tema, google, facebook, microsoft, auth}) => {
     const email = useInput("email", validateEmail)
     const pass = useInput("password", validatePass)
     const { response, type, showResponseError } = useFormResponse();
-    if(auth){
-        return <Navigate to="/home"/>
-    }
-    return <>
+    const {loginM} = useMiddleware()
+
+    return <Middleware {...loginM}>
         <SignIUContainer>
             <Header>
                 <Logo />
@@ -84,7 +85,7 @@ const Login = ({toggleTheme, action, tema, google, facebook, microsoft, auth}) =
             </SignIUCard>
             <SignIUFooter><h4>Easy-Access. © Derechos Reservados 2023</h4></SignIUFooter>
         </SignIUContainer>
-    </>
+    </Middleware>
 }
 
 export default Login
