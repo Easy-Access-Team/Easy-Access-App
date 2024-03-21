@@ -9,6 +9,8 @@ import { lightTheme, darkTheme } from "../../UI/themes";
 import { useState } from "react";
 import Loader from "../Loader/Index";
 import useAuth from "../../hooks/useAuth";
+import Middleware from "../Middleware/Index";
+
 
 
 const RouteList = () => {
@@ -18,7 +20,9 @@ const RouteList = () => {
   const toggleTheme = () => {
     localStorage.theme = `${ !tema }`
     setTema(!tema)
-  }
+    }
+  const { authM } = useMiddleware()
+
   return <ThemeProvider theme={tema ? lightTheme : darkTheme}>
     <Loader message={loader}/>
     {user && user.email}
@@ -27,8 +31,8 @@ const RouteList = () => {
         <Route path="/" element={ <Welcome toggleTheme={toggleTheme} tema={tema} /> }/>
         <Route path="/login" element={ <Login action={login} auth={auth} toggleTheme={toggleTheme} google={loginWithGoogle} facebook={loginWithFacebook} microsoft={loginWithMicrosoft} tema={tema}/> } />
         <Route path="/register" element={<Register action={signUp} google={loginWithGoogle} toggleTheme={toggleTheme} tema={tema} facebook={loginWithFacebook} microsoft={loginWithMicrosoft} auth={auth}/>}/> 
-        {/* <Route path="/home" element={<Home/> } />
-        <Route path="/asignaciones" element={<Asignaciones/>}/>
+        <Route path="/home" element={<Middleware {...authM} children={<Home />} />} />
+        {/*<Route path="/asignaciones" element={<Asignaciones/>}/>
         <Route path="*" element={<Error404/>}/> */}
       </Routes>
     </Router>
