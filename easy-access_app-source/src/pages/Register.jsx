@@ -12,6 +12,8 @@ import { validateNameApellidos, validateEmail, validatePass, validatePassconf, v
 import useInput from "../hooks/useInput";
 import useFormResponse from "../hooks/useFormResponse";
 import { authErrors } from "../firebase.errors";
+import useMiddleware from "../hooks/useMiddleware";
+import Middleware from "../components/Middleware/Index";
 
 const Register = ({ toggleTheme, action, tema, auth, google, facebook, microsoft}) => {
     const name = useInput("text", validateNameApellidos)
@@ -21,10 +23,9 @@ const Register = ({ toggleTheme, action, tema, auth, google, facebook, microsoft
     const passconf = useInput("password", validatePassconf)
     const terms = useInput("checkbox", validateTerms)
     const { response, type, showResponseError } = useFormResponse();
-    if(auth){
-        return <Navigate to="/home"/>
-    }
-    return <>
+    const {loginM} = useMiddleware()
+
+    return <Middleware {...loginM}>
         <SignIUContainer>
             <Header>
                 <Logo />
@@ -98,7 +99,7 @@ const Register = ({ toggleTheme, action, tema, auth, google, facebook, microsoft
             </SignIUCard>
             <SignIUFooter><h4>Easy-Access. © Derechos Reservados 2023</h4></SignIUFooter>
         </SignIUContainer>
-    </>
+    </Middleware>
 }
 
 export default Register
