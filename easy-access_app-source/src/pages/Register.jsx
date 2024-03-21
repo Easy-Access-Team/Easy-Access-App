@@ -7,15 +7,17 @@ import Checkbox from "../components/Form/Checkbox";
 import Btn from "../components/Button/Index";
 import Icon from "../components/Icon/Index";
 import signInUp from "../assets/img/landing/signInUp.webp"
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { validateNameApellidos, validateEmail, validatePass, validatePassconf, validateTerms } from "../validations";
 import useInput from "../hooks/useInput";
 import useFormResponse from "../hooks/useFormResponse";
 import { authErrors } from "../firebase.errors";
 import useMiddleware from "../hooks/useMiddleware";
 import Middleware from "../components/Middleware/Index";
+import useAuth from "../hooks/useAuth";
+import useAppContext from "../hooks/useAppContext";
 
-const Register = ({ toggleTheme, action, tema, auth, google, facebook, microsoft}) => {
+const Register = () => {
     const name = useInput("text", validateNameApellidos)
     const apellidos = useInput("text", validateNameApellidos)
     const email = useInput("email", validateEmail)
@@ -24,6 +26,8 @@ const Register = ({ toggleTheme, action, tema, auth, google, facebook, microsoft
     const terms = useInput("checkbox", validateTerms)
     const { response, type, showResponseError } = useFormResponse();
     const {loginM} = useMiddleware()
+    const {signUp, loginWithGoogle, loginWithFacebook, loginWithMicrosoft} = useAuth()
+    const {toggleTheme, tema} = useAppContext()
 
     return <Middleware {...loginM}>
         <SignIUContainer>
@@ -54,7 +58,7 @@ const Register = ({ toggleTheme, action, tema, auth, google, facebook, microsoft
                         passconf.validate(passconf.value, pass.value)
                         terms.validate(terms.value)
                         if (name.valid && apellidos.valid && email.valid && pass.valid && passconf.valid && terms.valid) {
-                            action(name.value, apellidos.value, email.value, pass.value).catch((error)=>{
+                            signUp(name.value, apellidos.value, email.value, pass.value).catch((error)=>{
                                 showResponseError(authErrors[error.code]  || authErrors.defaulError)
                             })
                         }
@@ -76,21 +80,21 @@ const Register = ({ toggleTheme, action, tema, auth, google, facebook, microsoft
                        </form>
                     <Btn action="Iniciar sesión con Google" colors="primary" type="icon" icon="login"
                         onClick={() => {
-                            google().catch((error) => {
+                            loginWithGoogle().catch((error) => {
                                 showResponseError(authErrors[error.code]  || authErrors.defaulError)
                             })
                         }}
                     />
                     <Btn action="Iniciar sesión con Facebook" colors="primary" type="icon" icon="login"
-                        click={()=>{
-                            facebook().catch((error)=>{
+                        onClick={()=>{
+                            loginWithFacebook().catch((error)=>{
                                 showResponseError(authErrors[error.code] || authErrors.defaulError)
                             })
                         }}
                     />
                     <Btn action="Iniciar sesión con Microsoft" colors="primary" type="icon" icon="login"
                         onClick={() => {
-                            microsoft().catch((error) => {
+                            loginWithMicrosoft().catch((error) => {
                                 showResponseError(authErrors[error.code] || authErrors.defaulError)
                             })
                         }}

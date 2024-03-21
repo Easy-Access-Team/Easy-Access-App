@@ -5,7 +5,7 @@ import Input from "../components/Form/Input";
 import Password from "../components/Form/Password";
 import Btn from "../components/Button/Index";
 import Icon from "../components/Icon/Index";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { validateEmail, validatePass } from "../validations";
 import signInUp from "../assets/img/landing/signInUp.webp"
 import useInput from "../hooks/useInput";
@@ -13,12 +13,17 @@ import useFormResponse from "../hooks/useFormResponse";
 import { authErrors } from "../firebase.errors";
 import useMiddleware from "../hooks/useMiddleware";
 import Middleware from "../components/Middleware/Index";
+import useAuth from "../hooks/useAuth";
+import useAppContext from "../hooks/useAppContext";
 
-const Login = ({toggleTheme, action, tema, google, facebook, microsoft, auth}) => {
+const Login = () => {
     const email = useInput("email", validateEmail)
     const pass = useInput("password", validatePass)
     const { response, type, showResponseError } = useFormResponse();
     const {loginM} = useMiddleware()
+    const {login, loginWithGoogle, loginWithFacebook, loginWithMicrosoft} = useAuth()
+    const {toggleTheme, tema} = useAppContext()
+
 
     return <Middleware {...loginM}>
         <SignIUContainer>
@@ -45,7 +50,7 @@ const Login = ({toggleTheme, action, tema, google, facebook, microsoft, auth}) =
                         email.validate(email.value)
                         pass.validate(pass.value)
                         if (email.valid && pass.valid) {
-                            action(email.value, pass.value).catch((error)=>{
+                            login(email.value, pass.value).catch((error)=>{
                                 showResponseError(authErrors[error.code]  || authErrors.defaulError)
                             })
                         }
@@ -62,21 +67,21 @@ const Login = ({toggleTheme, action, tema, google, facebook, microsoft, auth}) =
                     </form>
                     <Btn action="Iniciar sesión con Google" colors="primary" type="icon" icon="login" 
                         onClick={() => {
-                            google().catch((error)=>{
+                            loginWithGoogle().catch((error)=>{
                                 showResponseError(authErrors[error.code] || authErrors.defaulError)
                             })
                         }}
                     />
                     <Btn action="Iniciar sesión con Facebook" colors="primary" type="icon" icon="login"
                         onClick={()=>{
-                            facebook().catch((error)=>{
+                            loginWithFacebook().catch((error)=>{
                                 showResponseError(authErrors[error.code] || authErrors.defaulError)
                             })
                         }}
                     />
                     <Btn action="Iniciar sesión con Microsoft" colors="primary" type="icon" icon="login"
                         onClick={()=>{
-                            microsoft().catch((error)=>{
+                            loginWithMicrosoft().catch((error)=>{
                                 showResponseError(authErrors[error.code] || authErrors.defaulError)
                             })
                         }}

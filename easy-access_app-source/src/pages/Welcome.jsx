@@ -11,6 +11,7 @@ import Icon from "../components/Icon/Index";
 import Slider from "../components/Slider/Index"
 import useToggle from "../hooks/useToggle"
 import Btn from "../components/Button/Index";
+import useAppContext from "../hooks/useAppContext";
 const PageContainer = styled(Container)`
     & .center{
         display: flex;
@@ -241,11 +242,11 @@ const Footer = styled.footer`
         @media screen and (min-width: 0px) and (max-width: 480px) {justify-content: flex-start;}
     }
 `;
-const Welcome = ({tema, toggleTheme}) => {
+const Welcome = () => {
     const colors = useTheme()
     const navigate = useNavigate()
     const {toggle, trigger} = useToggle()
-    
+    const {tema, toggleTheme} = useAppContext()    
     return <>
         <Header>
             <Logo/>

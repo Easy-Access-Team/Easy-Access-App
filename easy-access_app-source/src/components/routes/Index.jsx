@@ -6,32 +6,27 @@ import Register from "../../pages/Register";
 import { ThemeProvider } from "styled-components"
 import { lightTheme, darkTheme } from "../../UI/themes";
 
-import { useState } from "react";
 import Loader from "../Loader/Index";
 import useAuth from "../../hooks/useAuth";
 import Middleware from "../Middleware/Index";
+import useMiddleware from "../../hooks/useMiddleware";
+import useAppContext from "../../hooks/useAppContext";
 
 
 
 const RouteList = () => {
-  const [loader, setLoader] = useState("");
-  const { login, signUp, loginWithGoogle, loginWithFacebook, loginWithMicrosoft, user, auth } = useAuth(setLoader)
-  const [tema, setTema] = useState(true)
-  const toggleTheme = () => {
-    localStorage.theme = `${ !tema }`
-    setTema(!tema)
-    }
+  const {auth, tema, loader} = useAppContext()
+  const { signUp } = useAuth()
   const { authM } = useMiddleware()
 
   return <ThemeProvider theme={tema ? lightTheme : darkTheme}>
     <Loader message={loader}/>
-    {user && user.email}
     <Router>
       <Routes>
-        <Route path="/" element={ <Welcome toggleTheme={toggleTheme} tema={tema} /> }/>
-        <Route path="/login" element={ <Login action={login} auth={auth} toggleTheme={toggleTheme} google={loginWithGoogle} facebook={loginWithFacebook} microsoft={loginWithMicrosoft} tema={tema}/> } />
-        <Route path="/register" element={<Register action={signUp} google={loginWithGoogle} toggleTheme={toggleTheme} tema={tema} facebook={loginWithFacebook} microsoft={loginWithMicrosoft} auth={auth}/>}/> 
-        <Route path="/home" element={<Middleware {...authM} children={<Home />} />} />
+        <Route path="/" element={ <Welcome/> }/>
+        <Route path="/login" element={ <Login/> } />
+        <Route path="/register" element={<Register/>}/> 
+        <Route path="/home" element={<Middleware {...authM} children={<Home/>}/>}/>
         {/*<Route path="/asignaciones" element={<Asignaciones/>}/>
         <Route path="*" element={<Error404/>}/> */}
       </Routes>
