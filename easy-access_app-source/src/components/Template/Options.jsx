@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Icon from "../Icon/Index";
+
 const Menu = styled.dialog`
     padding: 0;
     margin: .5rem 0;
@@ -86,28 +87,11 @@ const Menu = styled.dialog`
     }
 `;
 
-const Options = ({ handleOptions, show }) =>{
+
+const Options = ({controls}) =>{
+    const {closeOutside, trigger, ref} = controls
     const optionsRef = useRef(null)
-    useLayoutEffect(() => {
-        const handle = () => {
-            show ? optionsRef.current.showModal() : optionsRef.current.close();
-            optionsRef.current.addEventListener('keydown', (event) => {
-                if (event.key === 'Escape') {
-                    handleSidebar()
-                }
-            });
-        }
-        handle();
-        optionsRef.current.removeEventListener("keydown", handle)
-    }, [show, handleSidebar])
-    const closeOutside = (e) => {
-        const rect = optionsRef.current.getBoundingClientRect();
-        const isInDialog = (rect.top <= e.clientY && e.clientY <= rect.top + rect.height
-            && rect.left <= e.clientX && e.clientX <= rect.left + rect.width);
-        if (!isInDialog) {
-            handleSidebar();
-        }
-    };
+
     return <Menu onClick={(e) =>{closeOutside(e)}} ref={optionsRef}>
         <div>
             <h3>Options</h3>

@@ -166,30 +166,10 @@ const Logo = styled.div`
     }
 `;
 
-const Sidebar = ({ handleSidebar, show }) => {
-    const sidebarRef = useRef(null)
-    const {logout} = useAuth()
+    const Sidebar = ({controls}) => {
+    const {closeOutside, trigger, ref} = controls
+    const { logout } = useAuth()
 
-    useLayoutEffect(() => {
-        const handle = () => {
-            show ? sidebarRef.current.showModal() : sidebarRef.current.close();
-            sidebarRef.current.addEventListener('keydown', (event) => {
-                if (event.key === 'Escape') {
-                    handleSidebar()
-                }
-            });
-        }
-        handle();
-        sidebarRef.current.removeEventListener("keydown", handle)
-    }, [show, handleSidebar])
-    const closeOutside = (e) => {
-        const rect = sidebarRef.current.getBoundingClientRect();
-        const isInDialog = (rect.top <= e.clientY && e.clientY <= rect.top + rect.height
-            && rect.left <= e.clientX && e.clientX <= rect.left + rect.width);
-        if (!isInDialog) {
-            handleSidebar();
-        }
-    };
     return <AsideContainer onClick={(e) => { closeOutside(e) }} ref={sidebarRef}>
         <Aside>
             <Head>
@@ -218,7 +198,6 @@ const Sidebar = ({ handleSidebar, show }) => {
                     <NavTab to="/" > Perfil de Usuario <Icon icon="account_circle" /></NavTab>
                     <NavTab to="/" > Suscripción <Icon icon="credit_card" /></NavTab>
                     <NavBtn onClick={() => {
-                        handleSidebar();
                         logout()
                     }}>
                         Cerrar Sesión
