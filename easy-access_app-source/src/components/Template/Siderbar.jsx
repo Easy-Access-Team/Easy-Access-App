@@ -141,7 +141,22 @@ const NavBtn = styled.button`
 
 const ProfileSection = styled(Section)`
     color: ${({ theme }) => theme.onbg};
-    & img{
+    & img{ &.no-photo{
+            width: 4rem;
+            height: 4rem;
+            background: ${({ theme }) => theme.outline};
+            color: ${({ theme }) => theme.surfacev};
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            &::after{
+                content: "\\e853";
+                font-size: 3rem;
+                font-family: Material Icons;
+                text-align: center;
+            }
+        }
         align-self: center;
         width: 30%;
         border-radius: 100%;
@@ -169,6 +184,8 @@ const Logo = styled.div`
     const Sidebar = ({controls}) => {
     const {closeOutside, trigger, ref} = controls
     const { logout } = useAuth()
+    const { user } = useAppContext()
+
 
     return <AsideContainer onClick={(e) => { closeOutside(e) }} ref={sidebarRef}>
         <Aside>
@@ -178,9 +195,9 @@ const Logo = styled.div`
             </Head>
             <Content>
                 <ProfileSection>
-                    <img src="" alt="Profile" />
-                    <h4>nombre</h4>
-                    <small>correo</small>
+                    <img className={!user.photoURL ? "no-photo" : ""} src={user?.photoURL} referrerPolicy="no-referrer" alt="Profile" />
+                    <h4>{user?.displayName}</h4>
+                    <small>{user?.email}</small>
                 </ProfileSection>
                 <Section>
                     <NavTab to="/home" > Home <Icon icon="home" />
