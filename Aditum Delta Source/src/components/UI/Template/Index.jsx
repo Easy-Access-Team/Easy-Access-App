@@ -1,9 +1,10 @@
 import Topbar from "./Topbar"
 import Sidebar from "./Sidebar";
 import Options from "./Options";
-import {MainContainer} from "../../UI/index"
-import useDialog from "../../hooks/useDialog";
-const AppTemplate = ({children}) => {
+import {MainContainer} from "../../../styled/index"
+import useDialog from "../../../hooks/useDialog";
+import {Outlet} from "react-router-dom"
+const AppTemplate = () => {
     const sidebar = useDialog()
     const options = useDialog()
     return <>
@@ -11,7 +12,7 @@ const AppTemplate = ({children}) => {
         <Options controls={options} />
         <Sidebar controls={sidebar} />
         <MainContainer>
-            {children}
+            <Outlet/>
         </MainContainer>
     </>
 }

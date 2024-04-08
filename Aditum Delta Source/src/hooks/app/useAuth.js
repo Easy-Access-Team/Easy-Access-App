@@ -1,4 +1,4 @@
-import { firebaseAuth } from "../firebase";
+import { firebaseAuth } from "../../firebase/firebase";
 import { signInWithEmailAndPassword, sendEmailVerification, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider, OAuthProvider, signOut} from "firebase/auth";
 import useAppContext from "./useAppContext";
 const useAuth = () => {

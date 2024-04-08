@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import Icon from "../Icon/Index";
 import { NavLink } from "react-router-dom";
-import useAuth from "../../hooks/useAuth";
-import useAppContext from "../../hooks/useAppContext";
+import useAuth from "../../../hooks/app/useAuth";
+import useAppContext from "../../../hooks/app/useAppContext";
 
 const AsideContainer = styled.dialog`
     background: ${({ theme }) => theme.bg};

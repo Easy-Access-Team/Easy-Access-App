@@ -1,21 +1,5 @@
 import styled from "styled-components";
 
-export const SLogo = styled.div`
-    display: flex;
-    align-items: center;
-
-    & img{width: 1.5rem;}
-    & h2{line-height: normal;}
-    & h2 a{
-        text-decoration: none;
-        color: inherit;
-    }
-    @media screen and (min-width: 0px) and (max-width: 480px) {
-        & h2{
-            font-size: 1.17rem;
-        }
-    }
-`;
 
 export const Header = styled.header`
     background: ${({ theme }) => theme.bg};
@@ -61,7 +45,7 @@ export const FlexColum = styled.div`
 
 export const Banner = styled.section`
     height: auto;
-    background: url(${props => props.url}) center / cover;
+    background: url(${props => props.$url}) center / cover;
     &.light{
         div.info{
             color: ${({ theme }) => theme.bg};
@@ -131,8 +115,8 @@ export const MainContainer = styled.main`
     @media screen and (min-width: 0px) and (max-width: 480px) {padding: .5rem;}
 `;
 export const SectionBg = styled.section`
-    background: ${props => props.bg};
-    color: ${props => props.txt};
+    background: ${props => props.$bg};
+    color: ${props => props.$txt};
     padding: 0 2rem;
     @media screen and (min-width: 0px) and (max-width: 480px) {padding: 0 1.5rem;}
 `;
@@ -149,7 +133,7 @@ export const SignIUCard = styled.section`
 `;
 
 export const SignIUCardLeft = styled.div`
-    background: url(${props => props.url}) center / cover;
+    background: url(${props => props.$url}) center / cover;
     flex: 1 1 250px;
     & #backdrop{
         height: 100%;
@@ -216,6 +200,15 @@ export const SignIUCardRight = styled.div`
         justify-content: flex-start;
         box-shadow: none;
         padding: 1rem;
+    }
+`;
+export const CardContent = styled(SignIUCardRight)`
+    max-width: 600px;
+    margin: 0 auto;
+    box-shadow: none;
+    & .enlaces{ display: flex; gap: 1rem;}
+    @media screen and (min-width: 0px) and (max-width: 480px) {
+        justify-content: center;
     }
 `;
 export const FormFields = styled.fieldset`

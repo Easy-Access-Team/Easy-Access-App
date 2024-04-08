@@ -1,17 +1,16 @@
 import { Link, useNavigate } from "react-router-dom";
-import { Banner, Container, Header, NavHeader, SectionBg } from "../UI"
-import Logo from "../components/Logo/Index"
-import LogoSlogan from "../components/Logo/LogoSlogan"
+import { Banner, Container, Header, NavHeader, SectionBg } from "../styled/index"
+import Logo from "../components/UI/Logo/Index"
 import styled, { useTheme } from "styled-components";
 import banner from "../assets/img/landing/places-cover-min.webp"
 import qrScan from "../assets/img/landing/qrscan-anim-min.webp"
 import logo from "../assets/img/logo.png"
 import { clients, features, planes } from "../datoswelcome";
-import Icon from "../components/Icon/Index";
-import Slider from "../components/Slider/Index"
+import Icon from "../components/UI/Icon/Index";
+import Slider from "../components/UI/Slider/Index"
 import useToggle from "../hooks/useToggle"
-import Btn from "../components/Button/Index";
-import useAppContext from "../hooks/useAppContext";
+import Btn from "../components/UI/Button/Index";
+import useAppContext from "../hooks/app/useAppContext";
 const PageContainer = styled(Container)`
     & .center{
         display: flex;
@@ -246,29 +245,33 @@ const Welcome = () => {
     const colors = useTheme()
     const navigate = useNavigate()
     const {toggle, trigger} = useToggle()
-    const {tema, toggleTheme} = useAppContext()    
+    const {auth, tema, toggleTheme} = useAppContext()    
     return <>
         <Header>
             <Logo/>
             <NavHeader>
-                <Link to="/login">Login</Link>
-                <Link to="/register">Register</Link>
-                <Link to="/home">Home</Link>
+                {auth ? <><Link to="/home">Home</Link></> :
+                    <>
+                        <Link to="/auth/login">Login</Link>
+                        <Link to="/auth/register">Register</Link>
+                    </>
+                }
+                
                 <Icon onClick={toggleTheme} icon={tema ? "light_mode" : "dark_mode"} />
             </NavHeader>
         </Header>
         <PageContainer>
-            <Banner className={tema ? "light" : "dark"} url={banner}>
+            <Banner className={tema ? "light" : "dark"} $url={banner}>
                 <div className="info">
                     <div className="text flex-column">
                         <h1><b>Accede a tus lugares importantes con solo mostrar un código QR</b></h1>
                         <h3>¡Se acabaron las demoras! no más listas, no más registros. Con Easy Access el acceso es facil y seguro.</h3>
                         <div>
-                            <Btn action="Comenzar" colors="primary" onClick={() => {navigate("/register")}}/>
+                            <Btn action="Comenzar" colors="primary" onClick={() => {navigate("/auth/register")}}/>
                         </div>
                     </div>
                     <div className="img">
-                        <img src={qrScan} alt="qr code" />
+                        <img loading="lazy" src={qrScan} alt="qr code" />
                     </div>
                 </div>
             </Banner>
@@ -277,9 +280,9 @@ const Welcome = () => {
                     <h1>Administra tus accesos con nosotros.</h1>
                     <p>Easy Access es un sistema de gestión y control de acceso mediante el registro de codigo QR. Desarrollado por estudiantes de la UT Riviera Maya para facilitar el acceso a diversas instalaciones, manteniento la seguridad y brindando herramientas para saber quien entra y sale en todo momento.</p>
                 </div>
-                <LogoSlogan/>
+                <Logo redirect={false} slogan={true}/>
             </section>
-            <SectionBg bg={colors.secondary} txt={colors.onsecondary}>
+            <SectionBg $bg={colors.secondary} $txt={colors.onsecondary}>
                 <section className="center">
                     <div className="flex-column description">
                         <h1>Diferentes casos, una solución.</h1>
@@ -290,8 +293,8 @@ const Welcome = () => {
                     {clients.map(client => 
                         <li className="clientes" key={client.id}>
                             <div className="head">
-                                <img className="cover" src={client.cover} alt="" />
-                                <img className="icon" src={client.icon} alt="" />
+                                <img loading="lazy" className="cover" src={client.cover} alt="" />
+                                <img loading="lazy" className="icon" src={client.icon} alt="" />
                             </div>
                             <div className="text flex-column">
                                 <h3><b>{client.titulo}</b></h3>
@@ -334,13 +337,13 @@ const Welcome = () => {
                                 <h1>{toggle ? plan.anual : plan.mensual}<small>{plan.moneda}</small></h1>
                                 <span className={`message ${toggle && plan.anual > 0 && "visible"}`}>Ahorra un 15%</span>
                             </div>
-                            <img src={plan.img} alt="suscripcion icon" />
+                            <img loading="lazy" src={plan.img} alt="suscripcion icon" />
                             <ul>
                                 {plan.features.map((feature, i) =>
                                     <li key={plan.id + i}><Icon icon="check" /><span>{feature.feature}</span></li>
                                 )}
                             </ul>
-                            <Btn action={plan.action} colors="primary" type="icon" icon={plan.icon} onClick={() => {navigate("/register")}} />
+                            <Btn action={plan.action} colors="primary" type="icon" icon={plan.icon} onClick={() => {navigate("/auth/register")}} />
                         </li>
                     )}
                 </Planes>
@@ -348,7 +351,7 @@ const Welcome = () => {
         </PageContainer>
         <Footer className={tema ? "light" : "dark"}>
             <section className="head">
-                <img src={logo} alt="" />
+                <img loading="lazy" src={logo} alt="" />
                 <h3><b>Easy-Access. © Derechos Reservados 2023</b></h3>
             </section>
             <section className="content">

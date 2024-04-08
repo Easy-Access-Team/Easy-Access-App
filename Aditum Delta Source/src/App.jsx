@@ -1,8 +1,14 @@
-import GlobalStyle from "./GlobalStyles";
+import GlobalStyle from "./styled/GlobalStyles.jsx";
 import RouteList from "./components/Routes/Index.jsx"
-import { AppProvider } from "./context.jsx";
-
-
+import { AppProvider } from "./context/context.jsx";
+document.addEventListener("visibilitychange", ()=> {
+  const path = window.location.pathname
+  if(document.visibilityState === "hidden"){
+    if(path !== "/auth/login" && path !== "/auth/register"){
+      localStorage.setItem("previous", path)
+    }
+  }
+})
 function App() {
   return <AppProvider>
     <GlobalStyle />

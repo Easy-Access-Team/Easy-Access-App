@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { Header } from "../../UI";
+import { Header } from "../../../styled/index";
 import Logo from "../Logo/Index";
 import Icon from "../Icon/Index";
 
