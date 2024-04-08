@@ -97,7 +97,7 @@ const Slider = ({datos}) => {
         </ul>
         <CarrouselControls>
             {datos.map((dato, i) => 
-                <li className={i === control ? "active" : ""} 
+                <li data-testid={`control-${i}`} className={i === control ? "active" : ""} 
                     onClick={() => {
                         const calc = i * -(100 / datos.length);
                         setControl(i)
