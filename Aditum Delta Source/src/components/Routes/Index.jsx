@@ -15,7 +15,19 @@ import ForgotPassword from "../../pages/auth/ForgotPassword";
 import AuthContainer from "../Middleware/AuthContainer";
 import AppContainer from "../Middleware/AppContainer";
 
+import AdminContainer from "../Middleware/AdminContainer"
+import InstalationContainer from "../Middleware/InstalationContainer";
+import Panel from "../../pages/app/admin/Panel";
+import Instalation from "../../pages/app/admin/instalation/Dashboard";
+import InstalationUsers from "../../pages/app/admin/instalation/InstalationUsers";
 
+<Route path="admin/" element={<AdminContainer/>}>
+            <Route path="panel" element={<Panel />}/>
+	<Route path="instalation/:id/" element={<InstalationContainer/>}>
+		<Route path="dashboard" element={<Instalation/>} />
+              	<Route path="users" element={<InstalationUsers/>} />
+	</Route>
+</Route>
 
 const RouteList = () => {
   const { tema, loader} = useAppContext()
