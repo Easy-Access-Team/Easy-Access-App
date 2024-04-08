@@ -1,16 +1,15 @@
 # Logs
-easy-access_app-source/logs
-easy-access_app-source/*.log
-easy-access_app-source/npm-debug.log*
-easy-access_app-source/yarn-debug.log*
-easy-access_app-source/yarn-error.log*
-easy-access_app-source/pnpm-debug.log*
-easy-access_app-source/lerna-debug.log*
-
-easy-access_app-source/node_modules
-easy-access_app-source/dist
-easy-access_app-source/dist-ssr
-easy-access_app-source/*.local
+Aditum Delta Source/logs
+Aditum Delta Source/*.log
+Aditum Delta Source/npm-debug.log*
+Aditum Delta Source/yarn-debug.log*
+Aditum Delta Source/yarn-error.log*
+Aditum Delta Source/pnpm-debug.log*
+Aditum Delta Source/lerna-debug.log*
+Aditum Delta Source/node_modules
+Aditum Delta Source/dist
+Aditum Delta Source/dist-ssr
+Aditum Delta Source/*.local
 
 # Editor directories and files
 .vscode/*
