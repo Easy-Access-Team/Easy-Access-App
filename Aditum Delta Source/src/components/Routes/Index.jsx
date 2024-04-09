@@ -38,18 +38,19 @@ const RouteList = () => {
         <Route path="/" element={<AppContainer />}>
           <Route path="home" element={<Home/>}/>
           {/*<Route path="/asignaciones" element={<Asignaciones/>}/>*/}
+		<Route path="user/" element={<Outlet/>}>
+	        	<Route path="inscription/:id/" element={<Inscription/>}/>
+        	</Route>
+		<Route path="admin/" element={<AdminContainer/>}>
+	        	<Route path="panel" element={<Panel />}/>
+		      	<Route path="instalation/:id/" element={<InstalationContainer/>}>
+				<Route path="dashboard" element={<Instalation/>} />
+	            		<Route path="users" element={<InstalationUsers/>} />
+				<Route path="records" element={<Records/>} />
+			</Route>
+	        </Route>
         </Route>
-        <Route path="user/" element={<Outlet/>}>
-	        <Route path="inscription/:id/" element={<Inscription/>}/>
-        </Route>
-        <Route path="admin/" element={<AdminContainer/>}>
-            <Route path="panel" element={<Panel />}/>
-	      <Route path="instalation/:id/" element={<InstalationContainer/>}>
-		    <Route path="dashboard" element={<Instalation/>} />
-            <Route path="users" element={<InstalationUsers/>} />
-	      </Route>
-        </Route>
-        <Route path="*" element={<NotFound/>}/> 
+	<Route path="*" element={<NotFound/>} />
       </Routes>
     </Router>
   </ThemeProvider>
