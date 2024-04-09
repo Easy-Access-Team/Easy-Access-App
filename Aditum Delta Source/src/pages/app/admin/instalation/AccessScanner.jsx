@@ -38,6 +38,36 @@ const AccessScanner = () => {
     const {id, point} = useParams()
     const colors = useTheme()
     const [cam, setCam] = useState("environment")
+    const validateAccess = async(value) => {
+        appLoader.custom("Validando QR")
+        let inscription
+        const q = query(collection(db, "inscriptions"), where("instID", "==", id), where("userID", "==", value))
+        await getDocs(q).then((snapshot)=>{
+            const results = snapshot.docs.map(doc => ({
+                id: doc.id,
+                ...doc.data()
+            }))
+            inscription = results[0]
+        })
+        if(inscription && inscription.active){
+            const newAccess = {
+                userDisplay: inscription.userDisplay,
+                pointDisplay: inscription.instDisplay,
+                date: serverTimestamp(),
+                type: "Entrada",
+                userID: inscription.userID,
+                instID: id,
+                pointID: point,
+            }
+            addDoc(collection(db, "records"),newAccess).then(()=>{
+                appToast.success("Registro exitoso", "Se ha registrado el acceso")
+                setDoc(doc(db, "instalations", id), {points: instalation?.records + 1}, {merge: true})
+            }).catch((e)=>{appToast.error("Hubo algún error.", e.message)})
+        }else{
+            appToast.warning("Acceso no Autorizado", "El usuario no tiene permitido acceder a la instalación")
+        }
+        appLoader.clearLoader()
+    }
     return <>
         <PageTitle>Escanear Codigo QR</PageTitle>
         <ScannerWrapper>
