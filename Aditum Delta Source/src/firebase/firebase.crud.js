@@ -42,3 +42,33 @@ export const collectionCRUD = (path, options) => {
         create, read, update, destroy, getRef, getQuery
     }
 }
+export const documentCRUD = (path, id) => {
+    let ref
+    try {
+        ref = doc(db, path, id)
+    } catch (error) {
+        console.log(error)
+    }
+
+    const getRef = () => {
+        return ref
+    }
+
+    const read = async () => {
+        let fetchedData = {}
+        await getDoc(ref).then((snap)=>{
+            fetchedData = snap.data()
+        })
+        return fetchedData
+    };
+    const update = (newData) => {
+        return setDoc(ref, newData, { merge: true });
+    };
+    const destroy = () => {
+        return deleteDoc(ref)
+    };
+    return {
+        read, update, destroy, getRef
+    }
+
+}
