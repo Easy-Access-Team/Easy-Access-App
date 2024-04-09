@@ -28,6 +28,7 @@ const RouteList = () => {
     <Loader message={loader}/>
     <Router>
       <Routes>
+        <Route path="suscription" element={<Suscription />} />
         <Route path="perfil" element={<Profile/>}/>
         <Route path="/welcome" element={ <Welcome/> }/>
         <Route path="/auth/" element={<AuthContainer/>}>
