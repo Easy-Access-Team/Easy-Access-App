@@ -21,14 +21,6 @@ import Panel from "../../pages/app/admin/Panel";
 import Instalation from "../../pages/app/admin/instalation/Dashboard";
 import InstalationUsers from "../../pages/app/admin/instalation/InstalationUsers";
 
-<Route path="admin/" element={<AdminContainer/>}>
-            <Route path="panel" element={<Panel />}/>
-	<Route path="instalation/:id/" element={<InstalationContainer/>}>
-		<Route path="dashboard" element={<Instalation/>} />
-              	<Route path="users" element={<InstalationUsers/>} />
-	</Route>
-</Route>
-
 const RouteList = () => {
   const { tema, loader} = useAppContext()
 
@@ -46,6 +38,16 @@ const RouteList = () => {
         <Route path="/" element={<AppContainer />}>
           <Route path="home" element={<Home/>}/>
           {/*<Route path="/asignaciones" element={<Asignaciones/>}/>*/}
+        </Route>
+        <Route path="user/" element={<Outlet/>}>
+	        <Route path="inscription/:id/" element={<Inscription/>}/>
+        </Route>
+        <Route path="admin/" element={<AdminContainer/>}>
+            <Route path="panel" element={<Panel />}/>
+	      <Route path="instalation/:id/" element={<InstalationContainer/>}>
+		    <Route path="dashboard" element={<Instalation/>} />
+            <Route path="users" element={<InstalationUsers/>} />
+	      </Route>
         </Route>
         <Route path="*" element={<NotFound/>}/> 
       </Routes>
