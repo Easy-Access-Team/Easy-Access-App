@@ -49,7 +49,7 @@ const RouteList = () => {
             <Route path="users" element={<InstalationUsers/>} />
 	      </Route>
         </Route>
-        <Route path="*" element={<NotFound/>}/> 
+        <Route path="records" element={<Records/>} /> 
       </Routes>
     </Router>
   </ThemeProvider>
