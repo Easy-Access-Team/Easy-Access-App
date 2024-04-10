@@ -30,7 +30,7 @@ const InfoCard = styled.li`
     flex: 1 0 160px;
     max-width: 280px;
     border-radius: 1rem;
-    background: ${({ theme }) => theme.surfacev};
+    background: ${({theme})=>theme.surfacev};
     display: flex;
     flex-direction: column;
     & .instalation{font-size: 5rem;}
@@ -45,8 +45,8 @@ const InfoCard = styled.li`
     & .action{
         padding: .5rem;
         border-radius: 0 0 1rem 1rem;
-        background: ${({ theme }) => theme.primary};
-        color: ${({ theme }) => theme.onprimary};
+        background: ${({theme})=>theme.primary};
+        color: ${({theme})=>theme.onprimary};
     }
     & button{
         color: inherit;
@@ -61,9 +61,9 @@ const InfoCard = styled.li`
 
 const Instalation = () => {
     const navigate = useNavigate()
-    const { id } = useParams()
-    const { document, loadingDoc, errorDoc } = useDocument("instalations", id)
-    const { name, active, icon, city, users, points, records } = document || { name: "", active: true, icon: "villa", city: "", users: 0, points: 0, records: 0 }
+    const {id} = useParams()
+    const {document, loadingDoc, errorDoc} = useDocument("instalations", id)
+    const {name, active, icon, city, users, points, records} = document || {name: "", active: true, icon: "villa", city: "", users: 0, points: 0, records: 0}
     return <>
         <PageTitle>Administrar Instalación</PageTitle>
         <MainInfo>
@@ -85,12 +85,12 @@ const Instalation = () => {
                         <span>Puntos de Acceso</span>
                     </div>
                     <div className="action">
-                        <button onClick={() => {
+                        <button onClick={()=>{
                             navigate(`/admin/instalation/${id}/access-points`)
                         }}>
                             Administrar <i className="material-icons">fact_check</i>
                         </button>
-                    </div>
+                   </div>
                 </InfoCard>
                 <InfoCard>
                     <div className="info">
@@ -98,7 +98,7 @@ const Instalation = () => {
                         <span>Usuarios</span>
                     </div>
                     <div className="action">
-                        <button onClick={() => {
+                        <button onClick={()=>{
                             navigate(`/admin/instalation/${id}/users`)
                         }}>
                             Administrar <i className="material-icons">fact_check</i>
@@ -112,7 +112,7 @@ const Instalation = () => {
                         <small>Hoy</small>
                     </div>
                     <div className="action">
-                        <button onClick={() => {
+                        <button onClick={()=>{
                             navigate(`/admin/instalation/${id}/records`)
                         }}>
                             Ver más <i className="material-icons">open_in_new</i>

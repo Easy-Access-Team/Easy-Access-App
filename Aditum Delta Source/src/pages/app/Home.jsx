@@ -1,7 +1,7 @@
 import useAppContext from "../../hooks/app/useAppContext"
 import styled from "styled-components"
+import Inscriptions from "../../features/User/Inscriptions";
 import { PageTitle } from "../../styled";
-import Inscriptions from "../../features/User/Inscriptions"
 const UserWelcome = styled.section`
     display: flex;
     align-items: center;

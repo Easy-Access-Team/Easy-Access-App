@@ -1,16 +1,19 @@
-import { Link, useNavigate } from "react-router-dom";
-import { Banner, Container, Header, NavHeader, SectionBg } from "../styled/index"
-import Logo from "../components/UI/Logo/Index"
 import styled, { useTheme } from "styled-components";
-import banner from "../assets/img/landing/places-cover-min.webp"
+import { Header, NavHeader, Banner, SectionBg, Container } from "../styled/index";
+import Logo from "../components/UI/Logo/Index";
 import qrScan from "../assets/img/landing/qrscan-anim-min.webp"
+import banner from "../assets/img/landing/places-cover-min.webp"
 import logo from "../assets/img/logo.png"
-import { clients, features, planes } from "../datoswelcome";
 import Icon from "../components/UI/Icon/Index";
-import Slider from "../components/UI/Slider/Index"
-import useToggle from "../hooks/useToggle"
 import Btn from "../components/UI/Button/Index";
+import Slider from "../components/UI/Slider/Index";
+
+import { clients, features, planes } from "../datoswelcome";
+import { Link, useNavigate } from "react-router-dom";
+
+import useToggle from "../hooks/useToggle";
 import useAppContext from "../hooks/app/useAppContext";
+
 const PageContainer = styled(Container)`
     & .center{
         display: flex;
@@ -33,6 +36,7 @@ const PageContainer = styled(Container)`
         & .description{ width: 100%; }
     }
 `;
+
 const List = styled.ul`
     display: flex;
     flex-wrap: wrap;
@@ -76,6 +80,7 @@ const List = styled.ul`
         }
     }
 `;
+
 const SelectorSuscription = styled.ul`
     display: flex;
     justify-content: center;
@@ -177,6 +182,7 @@ const Planes = styled(List)`
         }
     }
 `;
+
 const Footer = styled.footer`
     &.light{
         background: ${({theme}) => theme.onprimarycont};
@@ -242,22 +248,20 @@ const Footer = styled.footer`
     }
 `;
 const Welcome = () => {
-    const colors = useTheme()
     const navigate = useNavigate()
+    const colors = useTheme()
     const {toggle, trigger} = useToggle()
-    const {auth, tema, toggleTheme} = useAppContext()    
+    const {auth, tema, toggleTheme} = useAppContext()
     return <>
         <Header>
-            <Logo/>
+            <Logo />
             <NavHeader>
-                {auth ? <><Link to="/home">Home</Link></> :
-                    <>
-                        <Link to="/auth/login">Login</Link>
-                        <Link to="/auth/register">Register</Link>
-                    </>
+                {auth === false ? <>
+                    <Link to="/auth/login">Login</Link>
+                    <Link to="/auth/register">Register</Link>
+                </> : <Link to="/home">Home</Link>
                 }
-                
-                <Icon onClick={toggleTheme} icon={tema ? "light_mode" : "dark_mode"} />
+                <Icon onClick={()=>{toggleTheme()}} icon={tema ? "light_mode" : "dark_mode"} />
             </NavHeader>
         </Header>
         <PageContainer>
@@ -265,9 +269,9 @@ const Welcome = () => {
                 <div className="info">
                     <div className="text flex-column">
                         <h1><b>Accede a tus lugares importantes con solo mostrar un código QR</b></h1>
-                        <h3>¡Se acabaron las demoras! no más listas, no más registros. Con Easy Access el acceso es facil y seguro.</h3>
+                        <h3>¡Se acabaron las demoras! no más listas, no más registros. Con Aditum Delta el acceso es facil y seguro.</h3>
                         <div>
-                            <Btn action="Comenzar" colors="primary" onClick={() => {navigate("/auth/register")}}/>
+                            <Btn onClick={() => {navigate("/register")}} colors="primary" action="Comenzar" />
                         </div>
                     </div>
                     <div className="img">
@@ -278,9 +282,9 @@ const Welcome = () => {
             <section className="center">
                 <div className="flex-column description">
                     <h1>Administra tus accesos con nosotros.</h1>
-                    <p>Easy Access es un sistema de gestión y control de acceso mediante el registro de codigo QR. Desarrollado por estudiantes de la UT Riviera Maya para facilitar el acceso a diversas instalaciones, manteniento la seguridad y brindando herramientas para saber quien entra y sale en todo momento.</p>
+                    <p>Aditum Delta es un sistema de gestión y control de acceso mediante el registro de codigo QR. Desarrollado por estudiantes de la UT Riviera Maya para facilitar el acceso a diversas instalaciones, manteniento la seguridad y brindando herramientas para saber quien entra y sale en todo momento.</p>
                 </div>
-                <Logo redirect={false} slogan={true}/>
+                <Logo redirect={false} slogan={true} />
             </section>
             <SectionBg $bg={colors.secondary} $txt={colors.onsecondary}>
                 <section className="center">
@@ -313,7 +317,7 @@ const Welcome = () => {
                 <section className="center">
                     <div className="flex-column description">
                         <h1>¡Registrate Ya!</h1>
-                        <p>Crea ahora una cuenta en Easy Access y disfruta de las siguientes caracteristicas que ofrece nuestra aplicación.</p>
+                        <p>Crea ahora una cuenta en Aditum Delta y disfruta de las siguientes caracteristicas que ofrece nuestra aplicación.</p>
                     </div>
                 </section>
                 <Slider datos={features}/>
@@ -321,7 +325,7 @@ const Welcome = () => {
             <section>
                 <section className="center">
                     <div className="flex-column description">
-                        <h1>Gestiona tus instalaciones con Easy Access hoy mismo.</h1>
+                        <h1>Gestiona tus instalaciones con Aditum Delta hoy mismo.</h1>
                         <span>Contrata uno de nuestros planes que más se ajusten a tus necesidades.</span>
                     </div>
                 </section>
@@ -343,7 +347,7 @@ const Welcome = () => {
                                     <li key={plan.id + i}><Icon icon="check" /><span>{feature.feature}</span></li>
                                 )}
                             </ul>
-                            <Btn action={plan.action} colors="primary" type="icon" icon={plan.icon} onClick={() => {navigate("/auth/register")}} />
+                            <Btn onClick={() => {navigate("/suscription")}} colors="primary" type="icon" icon={plan.icon} action={plan.action} />
                         </li>
                     )}
                 </Planes>
@@ -352,7 +356,7 @@ const Welcome = () => {
         <Footer className={tema ? "light" : "dark"}>
             <section className="head">
                 <img loading="lazy" src={logo} alt="" />
-                <h3><b>Easy-Access. © Derechos Reservados 2023</b></h3>
+                <h3><b>Aditum Delta. © Derechos Reservados 2024</b></h3>
             </section>
             <section className="content">
                 <div>
@@ -383,4 +387,4 @@ const Welcome = () => {
         </Footer>
     </>
 }
-export default Welcome
+export default Welcome;

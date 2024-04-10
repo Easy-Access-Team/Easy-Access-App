@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Instalation } from "../../styled";
-import isActive from "../../utils/isActive"
+import isActive from "../../utils/isActive";
 import Btn from "../../components/UI/Button/Index";
 import useCollection from "../../hooks/data/useCollection";
 import DisplayData from "../../components/DisplayData/Index";
@@ -41,7 +41,7 @@ const Inscriptions = () => {
                 <section>
                     <h4>{inscription.instDisplay}</h4>
                     <p>{inscription.type}</p>
-                    <Link to={"/user/inscription/${inscription.id}/"}>
+                    <Link to={`/user/inscription/${inscription.id}/`}>
                         <Btn colors="primary" action="Ver más" type="icon" icon="open_in_new"/>
                     </Link>
                 </section>
@@ -50,4 +50,5 @@ const Inscriptions = () => {
         </InscriptionsContainer>
     </DisplayData>
 }
-export default Inscriptions
+
+export default Inscriptions;

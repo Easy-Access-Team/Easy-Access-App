@@ -1,30 +1,29 @@
 import { SignIUContainer, Header, NavHeader, SignIUCard, SignIUCardLeft, SignIUCardRight, FormFields, SignIUFooter, FormResponse } from "../../styled/index";
 import Logo from "../../components/UI/Logo/Index";
 import Input from "../../components/Form/Input";
-import Password from "../../components/Form/Password";
+import InputPass from "../../components/Form/InputPass";
 import Btn from "../../components/UI/Button/Index";
 import Icon from "../../components/UI/Icon/Index";
 import { Link } from "react-router-dom";
 import { validateEmail, validatePass } from "../../utils/validations";
 import signInUp from "../../assets/img/landing/signInUp.webp"
+import useAppContext from "../../hooks/app/useAppContext"
 import useInput from "../../hooks/form/useInput";
 import useFormResponse from "../../hooks/form/useFormResponse";
-import { authErrors } from "../../firebase/firebase.errors";
 import useAuth from "../../hooks/app/useAuth";
-import useAppContext from "../../hooks/app/useAppContext";
+import { authErrors } from "../../firebase/firebase.errors";
 
 const Login = () => {
+    const { toggleTheme, tema } = useAppContext();
+    const {login, loginWithGoogle, loginWithFacebook, loginWithMicrosoft} = useAuth()
     const email = useInput("email", validateEmail)
     const pass = useInput("password", validatePass)
-    const { response, type, showResponseError } = useFormResponse();
-    const {login, loginWithGoogle, loginWithFacebook, loginWithMicrosoft} = useAuth()
-    const {toggleTheme, tema} = useAppContext()
-
+    const {response, type, showResponseError} = useFormResponse();
 
     return <>
         <SignIUContainer>
             <Header>
-                <Logo redirect={true} />
+                <Logo/>
                 <NavHeader>
                     <Link to="/auth/register">Register</Link>
                     <Icon onClick={toggleTheme} icon={tema ? "light_mode" : "dark_mode"} />
@@ -34,8 +33,8 @@ const Login = () => {
                 <SignIUCardLeft $url={signInUp}>
                     <div id="backdrop" className={tema ? "light" : "dark"}>
                         <h2 className="message">¡Bienvenido!</h2>
-                        <Logo redirect slogan />
-                        <span className="message">Inicia sesión para continuar usando la aplicación y disfrutar los beneficios que brinda Easy Access.</span>
+                        <Logo slogan={true}/>
+                        <span className="message">Inicia sesión para continuar usando la aplicación y disfrutar los beneficios que brinda Aditum Delta.</span>
                     </div>
                 </SignIUCardLeft>
                 <SignIUCardRight>
@@ -43,9 +42,9 @@ const Login = () => {
                         e.preventDefault()
                         email.validate(email.value)
                         pass.validate(pass.value)
-                        if (email.valid && pass.valid) {
+                        if(email.valid && pass.valid){
                             login(email.value, pass.value).catch((error)=>{
-                                showResponseError(authErrors[error.code]  || authErrors.defaulError)
+                                showResponseError(authErrors[error.code] || authErrors.defaulError)
                             })
                         }
                     }}>
@@ -53,7 +52,7 @@ const Login = () => {
                         <FormResponse className={type}>{response}</FormResponse>
                         <FormFields>
                             <Input {...email} label="Correo" id="correo" placeholder="Escribe tu correo electronico" />
-                            <Password {...pass} label="Contraseña" id="contra" placeholder="Escribe tu contraseña" />
+                            <InputPass {...pass}label="Contraseña" id="contra" placeholder="Escribe tu contraseña"/>
                             <small><Link to="/auth/forgot-password">Olvidé mi contraseña</Link></small>
                         </FormFields>
                         <Btn colors="primary" action="Iniciar Sesión" />
@@ -82,9 +81,8 @@ const Login = () => {
                     />
                 </SignIUCardRight>
             </SignIUCard>
-            <SignIUFooter><h4>Easy-Access. © Derechos Reservados 2023</h4></SignIUFooter>
+            <SignIUFooter><h4>Aditum Delta. © Derechos Reservados 2024</h4></SignIUFooter>
         </SignIUContainer>
     </>
 }
-
-export default Login
+export default Login;

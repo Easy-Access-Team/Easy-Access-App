@@ -17,7 +17,7 @@ const UsersContainer = styled.ul`
         flex: 1 1 225px;
         position: relative;
         padding: 1rem;
-        background: ${({ theme }) => theme.surfacev};
+        background: ${({theme})=>theme.surfacev};
         border-radius: .25rem;
         display: flex;
         gap: 1rem;
@@ -27,23 +27,23 @@ const UsersContainer = styled.ul`
             border-radius: 50%;
             width: 50px;
             height: 50px;
-            background: ${({ theme }) => theme.outline};
+            background: ${({theme})=>theme.outline};
         }
         & div{
             padding-left: 1rem;
-            border-left: 2px solid ${({ theme }) => theme.primary};
+            border-left: 2px solid ${({theme})=>theme.primary};
             flex-grow: 1;
         }
         & button{
             align-self: flex-start;
         }
         &.inactive{
-            background: ${({ theme }) => theme.outline};
-            color: ${({ theme }) => theme.surfacev}
+            background: ${({theme})=>theme.outline};
+            color: ${({theme})=>theme.surfacev}
         }
     }
 `;
-const Users = ({ data, editAction, deactivateAction }) => {
+const Users = ({data, editAction, deactivateAction}) =>{
     const [id, setID] = useState("")
     const [doc, setDoc] = useState({})
     const edit = useDialog()
@@ -51,9 +51,9 @@ const Users = ({ data, editAction, deactivateAction }) => {
     const inputs = {
         name: useInput("text", validateNames),
         type: useInput("text", validateNames),
-        monitor: useInput("checkbox", () => { return { fail: false, message: "" } })
+        monitor: useInput("checkbox", ()=>{return {fail: false, message: ""}})
     }
-    const showEdit = () => {
+    const showEdit = () =>{
         inputs.name.validate(doc.userDisplay)
         inputs.type.validate(doc.type)
         inputs.monitor.validate(doc.monitor)
@@ -68,26 +68,26 @@ const Users = ({ data, editAction, deactivateAction }) => {
                 <br />
                 <small>Monitor: {user.monitor ? "Si" : "No"}</small>
             </div>
-            <Btn onClick={() => {
+            <Btn onClick={()=>{
                 setID(user.id)
                 setDoc(user)
             }} type="only-icon" icon="more_horiz" colors="primary oncont" />
-            {id === user.id && <Menu cleanRef={() => { setID("") }}>
-                <button onClick={() => {
+            {id === user.id && <Menu cleanRef={()=>{setID("")}}>
+                <button onClick={()=>{
                     showEdit()
                 }}>Editar usuario</button>
                 <hr />
-                <button onClick={() => {
-                    if (doc.active) {
+                <button onClick={()=>{
+                    if(doc.active){
                         deactivate.trigger()
-                    } else {
-                        deactivateAction(doc.id, { name: doc.userDisplay, active: !doc.active })
+                    }else{
+                        deactivateAction(doc.id, {name: doc.userDisplay, active: !doc.active})
                     }
                 }}>{isActive(user.active, "Reactivar", "Desactivar", true)} usuario.</button>
                 <hr />
             </Menu>}
         </li>)}
-        <EditUser modal={edit} action={editAction} inputs={inputs} user={doc} />
+        <EditUser modal={edit} action={editAction} inputs={inputs} user={doc}/>
         <DeactivateUser modal={deactivate} user={doc} action={deactivateAction} />
     </UsersContainer>
 }

@@ -6,7 +6,7 @@ import Login from "../../pages/auth/Login";
 import Register from "../../pages/auth/Register";
 import ForgotPassword from "../../pages/auth/ForgotPassword";
 import Home from "../../pages/app/Home";
-// import Asignaciones from "../../pages/app/Asignaciones";
+import Asignaciones from "../../pages/app/Asignaciones";
 import Profile from "../../pages/app/user/Profile";
 import Suscription from "../../pages/app/user/Suscription";
 import Panel from "../../pages/app/admin/Panel";
@@ -14,7 +14,7 @@ import Instalation from "../../pages/app/admin/instalation/Dashboard";
 import InstalationUsers from "../../pages/app/admin/instalation/InstalationUsers";
 import AccessPoints from "../../pages/app/admin/instalation/AccessPoints";
 import Inscription from "../../pages/app/user/Inscription";
-import AccessScanner from "../../pages/app/admin/instalation/AccessScanner";
+import AccessScanner from "../../pages/app/admin/instalation/AccessScaner";
 import Records from "../../pages/app/admin/instalation/Records";
 import NotFound from "../../pages/NotFound";
 
@@ -45,7 +45,7 @@ const RouteList = () => {
         <Route path="/account-verify-reset" element={<AccountVerifyReset/>}/>
         <Route path="/" element={<AppContainer />}>
           <Route path="home" element={<Home/>}/>
-          {/* <Route path="asignaciones" element={<Asignaciones/>}/> */}
+          <Route path="asignaciones" element={<Asignaciones/>}/>
           <Route path="user/" element={<Outlet/>}>
             <Route path="perfil" element={<Profile/>}/>
             <Route path="suscription" element={<Suscription/>}/>

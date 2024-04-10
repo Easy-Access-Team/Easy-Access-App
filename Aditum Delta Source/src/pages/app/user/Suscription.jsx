@@ -8,39 +8,39 @@ import useCollection from "../../../hooks/data/useCollection";
 import useDocument from "../../../hooks/data/useDocument";
 import isActive from "../../../utils/isActive";
 import formatPrice from "../../../utils/formatPrice";
-const Suscription = () => {
-    const { appToast } = useAppContext()
-    const { toggle, trigger } = useToggle()
-    const { collData, loadingColl, errorColl } = useCollection("suscription-plans", { orderParams: { oField: "mensual" } })
-    const { document, loadingDoc, errorDoc, updateDoc } = useDocument("suscriptions", localStorage.getItem("uid") || null)
-    const { type, active, display } = document || { type: "", active: false, display: "" }
-    const updateSuscriptionPlan = async (type, name) => {
-        updateDoc({ type: type, display: name, active: active }).then(() => {
+const Suscription = () =>{
+    const {appToast} = useAppContext()
+    const {toggle, trigger} = useToggle()
+    const {collData, loadingColl, errorColl} = useCollection("suscription-plans", {orderParams: {oField: "mensual"}})
+    const {document, loadingDoc, errorDoc, updateDoc} = useDocument("suscriptions", localStorage.getItem("uid") || null)
+    const {type, active, display} = document || {type: "", active: false, display: ""}
+    const updateSuscriptionPlan = async(type, name) => {
+        updateDoc({type: type, display: name, active: active}).then(()=>{
             appToast.success("Operacion exitosa", "Se ha actualizado tu suscripcion")
         })
     }
-    const toggleSuscription = async () => {
-        updateDoc({ active: !active }).then(() => {
+    const toggleSuscription = async() => {
+        updateDoc({active: !active}).then(()=>{
             appToast.success("Cambio Exitoso", "Se desactivado tu suscripcion")
         })
     }
     return <>
         <PageTitle>Datos de Suscripcion</PageTitle>
         <p>Personaliza la experiencia de tu cuenta en Aditum Delta con tu suscripción.</p>
-        <DisplayData data={document} loading={loadingDoc} error={errorDoc} loader={<SkeletonSuscription />}
-            noData={{ message: "Aun no tienes una suscripción.", content: "Adquiere uno de nuestros planes y disfruta sus beneficios." }}
+        <DisplayData data={document} loading={loadingDoc} error={errorDoc} loader={<SkeletonSuscription/>} 
+            noData={{message: "Aun no tienes una suscripción.", content: "Adquiere uno de nuestros planes y disfruta sus beneficios."}}
         >
             <SuscriptionInfo className={isActive(active)}>
                 <h3><b>{display}</b></h3>
                 <p>Estado: {isActive(active, "Activa", "Inactiva")}</p>
-                <Btn onClick={toggleSuscription} colors="primary oncont" action={isActive(active, "Activar", "Desactivar", true)} />
+                <Btn onClick={toggleSuscription} colors="primary oncont" action={isActive(active, "Activar", "Desactivar", true)}/>
             </SuscriptionInfo>
         </DisplayData>
         <h3>Tipos de planes</h3>
-        <DisplayData data={collData} loading={loadingColl} error={errorColl} loader={<SkeletonPlans />}
-            noData={{ message: "No hemos podido cargar los planes.", content: "Espera un momento." }}
-        >
-           <Plans>
+        <DisplayData data={collData} loading={loadingColl} error={errorColl} loader={<SkeletonPlans />} 
+            noData={{message: "No hemos podido cargar los planes.", content: "Espera un momento."}}
+        >     
+            <Plans>
                 {collData?.map(plan => 
                     <Plan key={plan.id}>
                         <h4>{plan.title}</h4>
@@ -70,7 +70,7 @@ const Suscription = () => {
                     </Plan>
                 )}
             </Plans>
-        </DisplayData >
+        </DisplayData>
     </>
 }
 export default Suscription

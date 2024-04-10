@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-import { Header } from "../../../styled/index";
 import Logo from "../Logo/Index";
-import Icon from "../Icon/Index";
+import { Header } from "../../../styled/index";
+import Btn from "../Button/Index";
 
 const Info = styled.div`
     display: flex;
@@ -16,14 +16,13 @@ const Info = styled.div`
     }
 `;
 
-const Topbar = ({ handleSidebar, handleOptions }) => {
+const Topbar = ({handleSidebar, handleOptions}) => {
     return <Header>
-
         <Info>
-            <Icon onClick={handleSidebar} icon="menu" />
+            <Btn onClick={handleSidebar} type="only-icon" colors="primary cont" icon="menu"/>
             <Logo />
         </Info>
-        <Icon onClick={handleOptions} icon="more_vert" />
+        <Btn onClick={handleOptions} type="only-icon" colors="primary cont" icon="more_vert"/>
     </Header>
 }
 

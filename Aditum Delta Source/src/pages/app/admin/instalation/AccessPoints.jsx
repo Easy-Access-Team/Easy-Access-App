@@ -1,47 +1,57 @@
+import { doc, setDoc } from "firebase/firestore"
+import DisplayData from "../../../../components/DisplayData/Index"
+import Btn from "../../../../components/UI/Button/Index"
+import AccessPointsInstalation from "../../../../features/Admin/AccessPoints/AccessPoints"
+import AddAccessPoint from "../../../../features/Admin/AccessPoints/AddAccessPoint"
+import { db } from "../../../../firebase/firebase"
+import useAppContext from "../../../../hooks/app/useAppContext"
+import useCollection from "../../../../hooks/data/useCollection"
+import {PageTitle} from "../../../../styled/index"
+import { useParams, useNavigate} from "react-router-dom"
 import styled from "styled-components"
-import {useNavigate, useParams} from "react-router-dom"
-import Btn from "../../../../components/UI/Button/Index";
-import isActive from "../../../../utils/isActive";
-const AccessContainer = styled.ul`
+import useInstalationContex from "../../../../hooks/app/useInstalationContext"
+const Actions = styled.section`
     display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    & li{
-        flex: 1 1 200px;
-        max-width: 400px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 1rem;
-        gap: 1rem;
-        border-radius: .5rem;
-        background: ${({theme})=>theme.primarycont};
-        & div{
-            display: flex;
-            gap: 1rem;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            & button{
-                flex-grow: 1;
-            }
-        }
-    }
+    align-items: center;
+    justify-content: space-between;
+    gap: .5rem;
 `;
-const AccessPointsInstalation = ({data, editAction}) => {
-    const {id} = useParams()
+const AccessPoints = () => {
+    const {appToast} = useAppContext()
     const navigate = useNavigate()
-    return <AccessContainer>{data && data.map(accesspoint => <li key={accesspoint.id}>
-            <h4>{accesspoint.name} </h4>
-            <b>{isActive(accesspoint.active, "Activo", "Inactivo")}</b>
-            <div>
-                <Btn action="Editar" colors="primary" type="icon" icon="create" />
-                <Btn action="Desactivar" colors="primary oncont" type="icon" icon="create" />
-            </div>
-            <div>
-                <Btn onClick={()=>{navigate(`/admin/instalation/${id}/${accesspoint.id}/scanner`)}} action="Escanear" colors="primary" type="icon" icon="qr_code" />
-                <Btn action="Registros" colors="primary oncont" type="icon" icon="create" />
-            </div>
-        </li>)}
-    </AccessContainer>
+    const {instalation} = useInstalationContex()
+    const {id} = useParams()
+    const {collData, loadingColl, errorColl, createCollDoc, updateCollDoc} = useCollection("access-points", {whereParams: [
+        {wField: "instID", op: "==", value: id}
+    ]})
+    const addAction = async(data) =>{
+        createCollDoc(data).then(()=>{
+            appToast.success("Nuevo punto de acceso", "Acceso creado exitosamente")
+            setDoc(doc(db, "instalations", id), {points: instalation?.points + 1}, {merge: true})
+        }).catch((e)=>{
+            appToast.error("Hubo algun error", e.code)
+        })
+    }
+    const editAction = async(id, data) =>{
+        updateCollDoc(id, data).then(()=>{
+            appToast.success("Punto Actualizado", "Se ha modificado el punto de acceso")
+        }).catch((e)=>{
+            appToast.error("Hubo algun error", e.code)
+        })
+    }
+    return <>
+        <PageTitle>Puntos de Acceso</PageTitle>
+        <Actions>
+            <Btn onClick={()=>{navigate(`/admin/instalation/${id}/dashboard`)}} action="Panel" colors="primary" type="icon inverted" icon="arrow_back" />
+            <h3>Puntos de acceso {instalation?.name}</h3>
+        </Actions>
+        <AddAccessPoint action={addAction} id={id} />
+        <DisplayData data={collData} loading={loadingColl} error={errorColl} loader={<>Cargando</>} 
+            noData={{message: "Sin puntos de acceso", content: "Crea un punto de acceso."}}
+        >
+            <AccessPointsInstalation data={collData} editAction={editAction}/>
+        </DisplayData>
+    </>
 }
-export default AccessPointsInstalation;
+
+export default AccessPoints;

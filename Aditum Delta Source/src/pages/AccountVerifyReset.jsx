@@ -1,5 +1,5 @@
 import { Header, SignIUCard, CardContent, Container, SignIUFooter, FormResponse } from "../styled/index";
-import Password from "../components/Form/Password";
+import InputPass from "../components/Form/InputPass";
 import { validatePass } from "../utils/validations";
 import Btn from "../components/UI/Button/Index";
 import Logo from "../components/UI/Logo/Index";
@@ -46,7 +46,7 @@ const AccountVerifyReset = () => {
                                 }
                             }}
                         >
-                            <Password {...password} label="Contraseña" id="pass" placeholder="Ingresa tu nueva contraseña" />
+                            <InputPass {...password} label="Contraseña" id="pass" placeholder="Ingresa tu nueva contraseña" />
                             <Btn action="Cambiar Contraseña" colors="primary" />
                             <div className="enlaces">
                                 <Link to="/auth/login">Iniciar Sesión</Link> ó

@@ -1,12 +1,12 @@
 import Modal from "../../../components/Modal/Index"
 import Input from "../../../components/Form/Input"
-import InputCheck from "../../../components/Form/Checkbox"
-const EditUser = ({ user, modal, inputs, action }) => {
-    return <Modal modalFunction={() => {
+import InputCheck from "../../../components/Form/InputCheck"
+const EditUser = ({user, modal, inputs, action}) => {
+    return <Modal modalFunction={()=>{
         inputs.name.validate(inputs.name.value)
         inputs.type.validate(inputs.type.value)
         inputs.monitor.validate(inputs.monitor.value)
-        if (inputs.name.valid && inputs.type.valid && inputs.monitor.valid) {
+        if(inputs.name.valid && inputs.type.valid && inputs.monitor.valid){
             action(user.id, {
                 userDisplay: inputs.name.value,
                 type: inputs.type.value,

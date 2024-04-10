@@ -1,7 +1,8 @@
 import { useState } from "react"
 
-const useInput = (type, validation) =>{
-    const [value, setValue] = useState(type === "checkbox" ? false : "");
+const useInput = (type, validation, initial = "") =>{
+    const initialValue = type === "checkbox" ? true : initial
+    const [value, setValue] = useState(initialValue);
     const [error, setError] = useState(false);
     const [valid, setValid] = useState(false);
     const [message, setMessage] = useState("");
@@ -13,6 +14,12 @@ const useInput = (type, validation) =>{
         setMessage(description);
         !fail && setValid(true)
     }
+    const clean = () => {
+        setValue(initialValue)
+        setError(false)
+        setValid(false)
+        setMessage("")
+    }
 
     return {
         type,
@@ -20,7 +27,8 @@ const useInput = (type, validation) =>{
         error,
         valid,
         message,
-        validate
+        validate,
+        clean
     }
 }
 export default useInput
