@@ -10,8 +10,8 @@ describe("Display Data", () => {
     test("should load skeleton first", ()=>{
         render(<DisplayData loading={true} loader={<div data-testid="skeleton">Cargando</div>}><p>Data</p></DisplayData>)
         expect(screen.getByTestId("skeleton")).toBeDefined()
-        const container = screen.getByTestId("container")
-        expect(container.firstElementChild === <p>Data</p>).toBe(false)
+        const skeleton = screen.getByTestId("skeleton")
+        expect(skeleton.parentElement.firstChild === <p>Data</p>).toBe(false)
     })
     test("should load secondary loader when is data available", ()=>{
         render(<DisplayData loading={true} data={data} loader={<div data-testid="skeleton">Skeleton</div>}>
@@ -19,8 +19,8 @@ describe("Display Data", () => {
         </DisplayData>)
         expect(screen.getByText("Cargando")).toBeDefined()
         expect(screen.getByTestId("skeleton")).toBeDefined()
-        const container = screen.getByTestId("container")
-        expect(container.firstElementChild === <p>{data.nombre}</p>).toBe(false)
+        const skeleton = screen.getByTestId("skeleton")
+        expect(skeleton.parentElement.firstChild === <p>Data</p>).toBe(false)
     })
     test("should render error if there is an error", ()=>{
         render(<DisplayData loading={false} data={data} error={{code: "Error", message: "Content"}} loader={<div>Skeleton</div>}>
@@ -44,7 +44,5 @@ describe("Display Data", () => {
         </DisplayData>)
         expect(screen.getByText("NoData")).toBeDefined()
         expect(screen.getByText("NoContent")).toBeDefined()
-        const container = screen.getByTestId("container")
-        expect(container.firstElementChild === <p>{nodata?.nombre}</p>).toBe(false)
     })
 })

@@ -1,6 +1,6 @@
 import { collection, getDocs, query, where } from "firebase/firestore"
 import Input from "../../../components/Form/Input"
-import InputCheck from "../../../components/Form/InputCheck"
+import InputCheck from "../../../components/Form/Checkbox"
 import Modal from "../../../components/Modal/Index"
 import Btn from "../../../components/UI/Button/Index"
 import useInput from "../../../hooks/form/useInput"
@@ -71,7 +71,7 @@ const AddUser = ({ instalation, action, id }) => {
             <Input disabled={true} value={instalation?.name} id="inst" label="Instalación" /><br />
             <Input {...type} label="Tipo de inscripción" id="type"
                 placeholder="Estudiante, personal, servicios, residente, etc." /> <br />
-            <InputCheck {...monitor} label="Monitor" id="monitor" placeholder={El usuario ${monitor.value === true ? "podrá" : "no podrá"} administrar la instalación} />
+            <InputCheck {...monitor} label="Monitor" id="monitor" placeholder={`El usuario ${monitor.value === true ? "podrá" : "no podrá"} administrar la instalación`} />
         </Modal>
     </>
 }

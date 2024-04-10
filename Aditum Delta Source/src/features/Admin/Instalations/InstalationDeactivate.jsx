@@ -7,7 +7,7 @@ const InstalationDeactivate = ({controls, doc, action}) => {
     const name = useInput("text", validateInstalation)
     const active = isActive(doc.active, "Activar", "Desactivar", true)
     return <>
-        <Modal confirm={active} clean={name.clean} controls={controls} title={${active} ${doc.name}} type={isActive(doc.active, "danger", "")}
+        <Modal confirm={active} clean={name.clean} controls={controls} title={`${active} ${doc.name}`} type={isActive(doc.active, "danger", "")}
         modalFunction={()=>{
             name.validate(name.value, doc.name)
             if(name.valid){

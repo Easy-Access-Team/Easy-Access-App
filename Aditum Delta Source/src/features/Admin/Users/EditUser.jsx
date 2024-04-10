@@ -1,6 +1,6 @@
 import Modal from "../../../components/Modal/Index"
 import Input from "../../../components/Form/Input"
-import InputCheck from "../../../components/Form/InputCheck"
+import InputCheck from "../../../components/Form/Checkbox"
 const EditUser = ({ user, modal, inputs, action }) => {
     return <Modal modalFunction={() => {
         inputs.name.validate(inputs.name.value)
@@ -18,7 +18,7 @@ const EditUser = ({ user, modal, inputs, action }) => {
         <img src={user.photo} alt="profile" referrerPolicy="no-referrer" />
         <Input {...inputs.name} id="edit-user-name" label="Nombre" placeholder="Nombre para mostrar" />
         <Input {...inputs.type} id="edit-user-type" label="Tipo" placeholder="Tipo de inscripcion" />
-        <InputCheck {...inputs.monitor} id="edit-user-monitor" label="Monitor" placeholder={El usuario ${inputs.monitor.value === true ? "puede" : "no puede"} administrar la instalación} />
+        <InputCheck {...inputs.monitor} id="edit-user-monitor" label="Monitor" placeholder={`El usuario ${inputs.monitor.value === true ? "puede" : "no puede"} administrar la instalación`} />
     </Modal>
 }
 

@@ -28,7 +28,7 @@ const AdminInstalations = ({data, editAction, deactivate}) => {
                 <section>
                     <h4>{instalation.name}</h4>
                     <p>{instalation.city}</p>
-                    <Link to={/admin/instalation/${instalation.id}/dashboard}>
+                    <Link to={`/admin/instalation/${instalation.id}/dashboard`}>
                         <Btn colors="primary" action="Ver Instalación" type="icon" icon="open_in_new"/>
                     </Link>
                 </section>

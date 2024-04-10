@@ -7,7 +7,7 @@ import Btn from "../../components/UI/Button/Index";
 import Icon from "../../components/UI/Icon/Index";
 import signInUp from "../../assets/img/landing/signInUp.webp"
 import { Link } from "react-router-dom";
-import { validateNameApellidos, validateEmail, validatePass, validatePassconf, validateTerms } from "../../utils/validations";
+import { validateNames, validateEmail, validatePass, validatePassconf, validateTerms } from "../../utils/validations";
 import useInput from "../../hooks/form/useInput";
 import useFormResponse from "../../hooks/form/useFormResponse";
 import { authErrors } from "../../firebase/firebase.errors";
@@ -15,8 +15,8 @@ import useAuth from "../../hooks/app/useAuth";
 import useAppContext from "../../hooks/app/useAppContext";
 
 const Register = () => {
-    const name = useInput("text", validateNameApellidos)
-    const apellidos = useInput("text", validateNameApellidos)
+    const name = useInput("text", validateNames)
+    const apellidos = useInput("text", validateNames)
     const email = useInput("email", validateEmail)
     const pass = useInput("password", validatePass)
     const passconf = useInput("password", validatePassconf)

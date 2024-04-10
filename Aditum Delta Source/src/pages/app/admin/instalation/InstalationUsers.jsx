@@ -35,7 +35,7 @@ const InstalationUsers = () => {
     })
     const addUserAction = async (data) => {
         createCollDoc(data).then(() => {
-            appToast.success("Usuario Agregado", Se ha agregado el usuario a ${ instalation.name })
+            appToast.success("Usuario Agregado", `Se ha agregado el usuario a ${instalation.name}`)
             setDoc(doc(db, "instalations", id), { users: instalation?.users + 1 }, { merge: true })
         }).catch((e) => {
             appToast.error("Hubo algun error", e.code)
@@ -43,14 +43,14 @@ const InstalationUsers = () => {
     }
     const editUser = async (id, data) => {
         updateCollDoc(id, data).then(() => {
-            appToast.success("Usuario Actualizado", Se modificado la inscripcion de ${ data.userDisplay })
+            appToast.success("Usuario Actualizado", `Se modificado la inscripcion de ${data.userDisplay}`)
         }).catch((e) => {
             appToast.error("Hubo algun error", e.code)
         })
     }
     const deactivateUser = async (id, data) => {
         updateCollDoc(id, { active: data.active }).then(() => {
-            appToast.success("Usuario Actualizado", Se modificado la inscripcion de ${ data.name })
+            appToast.success("Usuario Actualizado", `Se modificado la inscripcion de ${data.name}`)
         }).catch((e) => {
             appToast.error("Hubo algun error", e.code)
         })
@@ -58,7 +58,7 @@ const InstalationUsers = () => {
     return <>
         <PageTitle>Administrar Usuarios</PageTitle>
         <Actions>
-            <Link to={/admin/instalation / ${id} /dashboard}><Btn action="Panel" colors="primary" type="icon inverted" icon="arrow_back" /></Link>
+            <Link to={`/admin/instalation/${id}/dashboard`}><Btn action="Panel" colors="primary" type="icon inverted" icon="arrow_back" /></Link>
         <h3>Usuarios de {instalation?.name}</h3>
         <AddUser id={id} instalation={instalation} action={addUserAction} />
     </Actions >

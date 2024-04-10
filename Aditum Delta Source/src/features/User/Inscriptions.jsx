@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Instalation } from "../../styled";
-import isActive from "../../utils/isActive";
+import isActive from "../../utils/isActive"
 import Btn from "../../components/UI/Button/Index";
 import useCollection from "../../hooks/data/useCollection";
 import DisplayData from "../../components/DisplayData/Index";
@@ -50,3 +50,4 @@ const Inscriptions = () => {
         </InscriptionsContainer>
     </DisplayData>
 }
+export default Inscriptions

@@ -5,7 +5,7 @@ import { collection, doc, getDoc, getDocs, query, where } from "firebase/firesto
 import { db } from "../../firebase/firebase"
 import { useState, useLayoutEffect } from "react"
 import SecondaryLoader from "../DisplayData/SecondaryLoader"
-import { InstalationProvider } from "../../contexts/instalation"
+import {InstalationProvider} from "../../context/instalation"
 const getInstalation = async(id) => {
     let instalation
     await getDoc(doc(db, "instalations", id)).then((snap)=>{

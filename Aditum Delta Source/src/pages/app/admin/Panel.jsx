@@ -30,7 +30,7 @@ const Panel = () => {
     }
     const deactivateInstalation = async(id, data) => {
         updateCollDoc(id, data).then(()=>{
-            appToast.success("Instalación Actualizada", Se ha ${data.active ? "activado" : "desactivado"} tu instalación)
+            appToast.success("Instalación Actualizada", `Se ha ${data.active ? "activado" : "desactivado"} tu instalación`)
         })
     }
     const editMonitoringInstalation = async(id, data) => {

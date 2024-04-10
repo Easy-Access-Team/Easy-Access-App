@@ -1,7 +1,7 @@
-import Btn from "../../../components/UI/Button/Index";
-import isActive from "../../../utils/isActive";
 import styled from "styled-components"
 import {useNavigate, useParams} from "react-router-dom"
+import Btn from "../../../../components/UI/Button/Index";
+import isActive from "../../../../utils/isActive";
 const AccessContainer = styled.ul`
     display: flex;
     flex-wrap: wrap;

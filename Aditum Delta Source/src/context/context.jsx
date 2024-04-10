@@ -63,6 +63,7 @@ export const AppProvider = ({children}) => {
         user,
         loader,
         tema,
+        alerts,
         appToast,
         appLoader,
         toggleTheme,

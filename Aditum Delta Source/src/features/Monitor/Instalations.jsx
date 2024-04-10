@@ -32,7 +32,7 @@ const MonitorInstalations = ({data, editAction}) => {
                 <section>
                     <h4>{instalation.instDisplay}</h4>
                     <p>{instalation.type}</p>
-                    <Link to={/admin/instalation/${instalation.instID}/dashboard}>
+                    <Link to={`/admin/instalation/${instalation.instID}/dashboard`}>
                         <Btn colors="primary" action="Ver Instalación" type="icon" icon="open_in_new"/>
                     </Link>
                 </section>
