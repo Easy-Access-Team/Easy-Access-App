@@ -21,10 +21,10 @@ describe('Slider', () => {
 
     test('updates slider control and slide on click', () => {
         render(<Slider datos={datosMock} />);
-        const control = screen.getByTestId("control-1")
+        const control = screen.getByRole("control-1")
         fireEvent.click(control);
         expect(control.classList.contains("active"));
-        const initialcontrol = screen.getByTestId("control-0")
+        const initialcontrol = screen.getByRole("control-0")
         fireEvent.click(initialcontrol);
         expect(control.classList.contains(""));
         expect(initialcontrol.classList.contains("active"));
