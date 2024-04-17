@@ -1,4 +1,4 @@
-import { Field, FieldInput } from "../../styled/index"
+import { Field, FieldInput } from "../../styled/form"
 import styled from "styled-components"
 
 const FieldCheck = styled(Field)`
