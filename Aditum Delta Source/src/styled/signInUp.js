@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Container } from ".";
+import {Container} from "./index"
 export const SignIUContainer = styled(Container)`
     @media screen and (min-width: 0px) and (max-width: 480px) {
         header{display:none;}
