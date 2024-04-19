@@ -172,7 +172,7 @@ const Sidebar = ({controls}) => {
                     <SidebarTab link="/admin/panel" title="Panel Administrador" icon="dashboard" handleSidebar={trigger}/>
                     <SidebarTab link="/" title="Mis Vehiculos" icon="directions_car" handleSidebar={trigger} />
                     <SidebarTab link="/asignaciones" title="Usuarios Asignados" icon="supervisor_account" handleSidebar={trigger} />
-                    <SidebarTab link="/" title="Notificaciones" icon="notifications" handleSidebar={trigger} />
+                    <SidebarTab link="/notifications" title="Notificaciones" icon="notifications" handleSidebar={trigger} />
                 </Section>
                 <Section>
                     <SidebarTab link="/user/perfil" title="Perfil de Usuario" icon="account_circle" handleSidebar={trigger} />

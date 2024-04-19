@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore"
+import { getMessaging } from "firebase/messaging";
 const firebaseConfig = {
   apiKey: "AIzaSyCCFxEM-hIG7Bl4TBsXl1oWbbF9ays4uBI",
   authDomain: "aditum-delta.firebaseapp.com",
@@ -12,5 +13,5 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const firebaseAuth = getAuth(app);
 const db = getFirestore(app)
-
-export {app, firebaseAuth, db}
+const messaging = getMessaging(app);
+export {app, firebaseAuth, db, messaging}

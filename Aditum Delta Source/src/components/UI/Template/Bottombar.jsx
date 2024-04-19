@@ -54,7 +54,7 @@ const Bottombar = ({page}) => {
             <FooterTab  to="/home"><Icon icon="home" />Home</FooterTab>
             <FooterTab  to="/asignaciones"><Icon icon="supervisor_account"/>Asignaciones</FooterTab>
             <FooterTab  to="/"><Icon icon="directions_car"/>Vehiculos</FooterTab>
-            <FooterTab  to="/"><Icon icon="notifications"/>Notificaciones</FooterTab>
+            <FooterTab  to="/notifications"><Icon icon="notifications"/>Notificaciones</FooterTab>
         </nav>
     </Footer>
 }

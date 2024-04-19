@@ -8,6 +8,7 @@ const Terms = lazy(() => import("../../pages/Terms"))
 const AccountVerifyReset = lazy(() => import("../../pages/auth/Login"))
 const Home = lazy(() => import("../../pages/app/Home"))
 const Asignaciones = lazy(() => import("../../pages/app/Asignaciones"))
+const Notifications = lazy(()=> import("../../pages/Notifications"));
 const Profile = lazy(() => import("../../pages/app/user/Profile"))
 const Suscription = lazy(() => import("../../pages/app/user/Suscription"))
 const Inscription = lazy(() => import("../../pages/app/user/Inscription"))
@@ -31,6 +32,7 @@ import AdminContainer from "../Middleware/AdminContainer";
 import InstalationContainer from "../Middleware/InstalationContainer";
 
 
+
 const RouteList = () => {
   const {tema, loader} = useAppContext();
   return <ThemeProvider theme={tema ? lightTheme : darkTheme}>
@@ -49,6 +51,7 @@ const RouteList = () => {
         <Route path="/" element={<AppContainer />}>
           <Route path="home" element={<Home/>}/>
           <Route path="asignaciones" element={<Asignaciones/>}/>
+          <Route path="notifications" element={<Notifications/>}/>
           <Route path="user/" element={<Outlet/>}>
             <Route path="perfil" element={<Profile/>}/>
             <Route path="suscription" element={<Suscription/>}/>
