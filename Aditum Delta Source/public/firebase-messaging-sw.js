@@ -13,20 +13,17 @@ firebase.initializeApp(defaultConfig);
 const messaging = firebase.messaging();
 
 messaging.onBackgroundMessage((payload) => {
-  console.log(payload)
   const notificationTitle = payload.notification.title;
   const notificationOptions = {
     body: payload.notification.body,
-    image: payload.notification.image,
-    badge: "https://aditum-delta.firebaseapp.com/assets/badge.png",
-    color: "#4355b9",
-    vibrate: [200, 100, 200]
+    icon: payload.notification.image,
+    badge: "https://aditum-delta.firebaseapp.com/assets/badge-4EZ-eLE_.png",
+    vibrate: [200, 100, 200, 100, 300]
   };
   self.registration.showNotification(notificationTitle, notificationOptions);
 });
 self.addEventListener("push", (event) => {
   const payload = event.data.json();
-  console.log(payload)
   const notification = {...payload.notification, time: payload.data.timestamp, read: false, clicked: false, id: payload.fcmMessageId}
   const request = indexedDB.open('notifications', 1);
   request.onupgradeneeded = (event) => {

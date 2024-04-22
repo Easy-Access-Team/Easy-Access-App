@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import styled from "styled-components";
-
+import badge from "../../../assets/img/badge.png"
 const CarrouselContainer = styled.div`
     width: 90%;
     display: flex;
@@ -71,6 +71,10 @@ const CarrouselControls = styled.ul`
             background: ${({theme}) => theme.primary};
             color: ${({theme}) => theme.onprimary}; 
         }
+        & img{
+            width: .8rem;
+            height: .8rem;
+        }
     }
 `;
 
@@ -97,13 +101,15 @@ const Slider = ({datos}) => {
         </ul>
         <CarrouselControls>
             {datos.map((dato, i) => 
-                <li role={`control-${i}`} className={i === control ? "active" : ""} 
+                <li role={`control-${i}`} className={i === control ? "active" : ""}
                     onClick={() => {
                         const calc = i * -(100 / datos.length);
                         setControl(i)
                         handleSlide(calc)
                     }} key={dato.id}
-                ></li>
+                >
+                    <img loading="lazy" src={badge} alt="control" />
+                </li>
             )}
         </CarrouselControls>
     </CarrouselContainer>
