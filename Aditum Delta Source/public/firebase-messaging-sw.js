@@ -13,25 +13,30 @@ firebase.initializeApp(defaultConfig);
 const messaging = firebase.messaging();
 
 messaging.onBackgroundMessage((payload) => {
+  console.log(payload)
   const notificationTitle = payload.notification.title;
   const notificationOptions = {
     body: payload.notification.body,
-    icon: payload.notification.image,
+    image: payload.notification.image,
+    badge: "https://aditum-delta.firebaseapp.com/assets/badge.png",
+    color: "#4355b9",
+    vibrate: [200, 100, 200]
   };
   self.registration.showNotification(notificationTitle, notificationOptions);
 });
 self.addEventListener("push", (event) => {
   const payload = event.data.json();
-  const notification = {...payload.notification, time: payload.data["google.c.a.ts"]}
-  const request = indexedDB.open('notifications_db', 1);
+  console.log(payload)
+  const notification = {...payload.notification, time: payload.data.timestamp, read: false, clicked: false, id: payload.fcmMessageId}
+  const request = indexedDB.open('notifications', 1);
   request.onupgradeneeded = (event) => {
     const db = event.target.result;
-    db.createObjectStore('notifications', { autoIncrement: true });
+    db.createObjectStore('notifications', { autoIncrement: false });
   };
   request.onsuccess = (event) => {
     const db = event.target.result;
     const transaction = db.transaction('notifications', 'readwrite');
     const notificationsStore = transaction.objectStore('notifications');
-    notificationsStore.add(notification);
+    notificationsStore.add(notification, payload.fcmMessageId)
   };
 });

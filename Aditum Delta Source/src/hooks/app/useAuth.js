@@ -112,7 +112,7 @@ const useAuth = () =>{
         logout,
         sendEmailToVerify, verifyEmail,
         changeName,
-        forgotPassword, resetPassword
+        forgotPassword, resetPassword, updateUserDoc
     }
 }
 export default useAuth

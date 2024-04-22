@@ -3,16 +3,22 @@ import useAppContext from "../../../hooks/app/useAppContext";
 
 const AlertsContainer = styled.ul`
     position: fixed;
-    right: 0;
+    inset: 0;
     box-sizing: border-box;
     z-index: 3;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     width: 100%;
+    height: min-content;
     max-width: 480px;
+    margin-inline: auto;
     transition: 200ms ease-in;
+    @media screen and (min-width: 0px) and (max-width: 480px) {
+        width: 80%;
+    }
     & li{
+        width: 100%;
         box-sizing: border-box;
         padding: .5rem 1rem;
         border-radius: .25rem;
@@ -20,7 +26,7 @@ const AlertsContainer = styled.ul`
         gap: .25rem;
         margin: .25rem 0;
         justify-content: space-between;
-        animation: show .5s ease-in-out, hide .5s ease-in-out 3.5s forwards;
+        animation: show .5s ease-in-out, hide .5s ease-in-out 3s forwards;
         @keyframes show {
             from {
                 display: none;
@@ -41,12 +47,11 @@ const AlertsContainer = styled.ul`
             }
             to{
                 display: none;
-                opacity: 0;
+                opacity: .1;
                 transform: translateY(-100%);
             }
         }
         @media screen and (min-width: 0px) and (max-width: 480px) {
-            width: 95%;
             padding: .5rem;
             margin: .25rem auto;
         }

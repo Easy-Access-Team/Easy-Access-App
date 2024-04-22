@@ -5,7 +5,7 @@ import { useState } from "react";
 import styled, {useTheme} from "styled-components"
 import {useParams, useNavigate} from "react-router-dom"
 import useAppContext from "../../../../hooks/app/useAppContext";
-import { addDoc, collection, doc, getDocs, query, serverTimestamp, setDoc, where } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, getDocs, query, serverTimestamp, setDoc, where } from "firebase/firestore";
 import { db } from "../../../../firebase/firebase";
 import useInstalationContext from "../../../../hooks/app/useInstalationContext";
 const ScannerWrapper = styled.section`
@@ -41,6 +41,7 @@ const AccessScanner = () => {
     const validateAccess = async(value) => {
         appLoader.custom("Validando QR")
         let inscription
+        let accesspoint
         const q = query(collection(db, "inscriptions"), where("instID", "==", id), where("userID", "==", value))
         await getDocs(q).then((snapshot)=>{
             const results = snapshot.docs.map(doc => ({
@@ -49,10 +50,13 @@ const AccessScanner = () => {
             }))
             inscription = results[0]
         })
+        // await getDoc("access-points", point).then(snap =>
+        //     accesspoint = snap.data()
+        // )
         if(inscription && inscription.active){
             const newAccess = {
                 userDisplay: inscription.userDisplay,
-                pointDisplay: inscription.instDisplay,
+                // pointDisplay: in.name,
                 date: serverTimestamp(),
                 type: "Entrada",
                 userID: inscription.userID,

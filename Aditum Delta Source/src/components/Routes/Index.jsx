@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, Outlet} from "react-router-dom";
-import {lazy, Suspense} from "react"
+import {lazy, Suspense, useEffect} from "react"
 const Welcome = lazy(() => import("../../pages/Welcome"))
 const Login = lazy(() => import("../../pages/auth/Login"))
 const Register = lazy(() => import("../../pages/auth/Register"))
@@ -16,7 +16,7 @@ const Panel = lazy(() => import("../../pages/app/admin/Panel"))
 const Instalation = lazy(() => import("../../pages/app/admin/instalation/Dashboard"))
 const InstUsers = lazy(() => import("../../pages/app/admin/instalation/InstUsers"))
 const AccessPoints = lazy(() => import("../../pages/app/admin/instalation/AccessPoints"))
-const AccessScanner = lazy(() => import("../../pages/app/admin/instalation/AccessScaner"))
+const AccessScanner = lazy(() => import("../../pages/app/admin/instalation/AccessScanner"))
 const Records = lazy(() => import("../../pages/app/admin/instalation/Records"))
 const NotFound = lazy(() => import("../../pages/NotFound"))
 
@@ -30,7 +30,6 @@ import AuthContainer from "../Middleware/AuthContainer";
 import AppContainer from "../Middleware/AppContainer";
 import AdminContainer from "../Middleware/AdminContainer";
 import InstalationContainer from "../Middleware/InstalationContainer";
-
 
 
 const RouteList = () => {

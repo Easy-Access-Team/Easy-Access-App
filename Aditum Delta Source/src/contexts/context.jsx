@@ -1,25 +1,7 @@
-import {createContext, useLayoutEffect, useState} from "react";
+import {createContext, useEffect, useLayoutEffect, useState} from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { firebaseAuth, messaging} from "../firebase/firebase";
 import { onMessage } from "firebase/messaging";
-const handleNotifications = (setNotifications, newNotification) => {
-    const request = indexedDB.open('notifications_db', 1);
-    request.onerror = (event) => {
-        console.error('Error al abrir la base de datos', event.target.error);
-    };
-    request.addEventListener("success", (event) =>{
-        const db = event.target.result;
-        const transaction = db.transaction('notifications', 'readwrite');
-        const notificationsStore = transaction.objectStore('notifications');
-        if(newNotification){
-            notificationsStore.add(newNotification);
-        }
-        const getRequest = notificationsStore.getAll();
-        getRequest.onsuccess = (event) => {
-            setNotifications(event.target.result);
-        };
-    })
-}
 export const AppContext = createContext()
 export const AppProvider = ({children}) => {
     if(!localStorage.getItem("theme")){
@@ -32,6 +14,8 @@ export const AppProvider = ({children}) => {
     const [alerts, setAlerts] = useState([]);
     const [toastTimer, setToastTimer] = useState(null);
     const [notifications, setNotifications] = useState([]);
+    const [unread, setUnread] = useState(0)
+    //Alerts
     const createToast = (newAlert) => {
         setAlerts([...alerts, newAlert]);
         if(toastTimer) {
@@ -40,7 +24,7 @@ export const AppProvider = ({children}) => {
         const newToastTimer = setTimeout(() => {
             setAlerts([]);
             setToastTimer(null);
-        }, 3500);
+        }, 4000);
         setToastTimer(newToastTimer);
     };
     const appToast = {
@@ -57,6 +41,7 @@ export const AppProvider = ({children}) => {
             createToast({variant: "error",title, message})
         }
     }
+    //Loader
     const appLoader = {
         basic: () => {setLoader("Cargando")},
         login: () => {setLoader("Iniciando Sesión")},
@@ -64,13 +49,12 @@ export const AppProvider = ({children}) => {
         custom: (message) => {setLoader(message)},
         clearLoader: () => {setLoader("")}
     }
+    //Theme
     const toggleTheme = () => {
         localStorage.theme = `${!tema}`
         setTema(!tema)
     }
-    const loadNotifications = () => {
-        handleNotifications(setNotifications)
-    }
+    //Auth User
     useLayoutEffect(()=>{
         const unsubscribe = onAuthStateChanged(firebaseAuth, async(currentUser) => {
             setUser(currentUser)
@@ -84,11 +68,34 @@ export const AppProvider = ({children}) => {
         });
         return () => unsubscribe();
     },[user])
-
+    //Push notifications
+    const handleNotifications = () => {
+        const request = indexedDB.open('notifications', 1);
+        request.onerror = (event) => {
+            console.error('Error al abrir la base de datos', event.target.error);
+        };
+        request.onupgradeneeded = (event) => {
+            const db = event.target.result;
+            db.createObjectStore('notifications', { autoIncrement: true });
+        };
+        request.onsuccess = (event) => {
+            const db = event.target.result;
+            const transaction = db.transaction('notifications', 'readonly');
+            const notificationsStore = transaction.objectStore('notifications');
+            const getRequest = notificationsStore.getAll();
+            getRequest.onsuccess = (event) => {
+                setNotifications(event.target.result);
+                const unreadNotifications = event.target.result.filter(notification => !notification.read);
+                setUnread(unreadNotifications.length)
+            };
+        };
+    }
+    useEffect(() => {
+        handleNotifications();
+    }, []);
     onMessage(messaging, (payload) => {
         appToast.info(payload.notification.title, payload.notification.body, payload.notification.image);
-        const notification = {...payload.notification, time: payload.data["google.c.a.ts"]}
-        handleNotifications(setNotifications, notification)
+        handleNotifications()
     });
     const values = {
         auth,
@@ -97,10 +104,11 @@ export const AppProvider = ({children}) => {
         tema,
         alerts,
         notifications,
+        unread,
         appToast,
         appLoader,
-        toggleTheme,
-        loadNotifications
+        toggleTheme, 
+        handleNotifications
     }
     return <AppContext.Provider value={values} >{children}</AppContext.Provider>
 }

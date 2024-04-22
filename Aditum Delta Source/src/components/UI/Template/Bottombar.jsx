@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 
 import Icon from "../Icon/Index";
+import useAppContext from "../../../hooks/app/useAppContext";
 
 const Footer = styled.footer`
     display: none;
@@ -32,7 +33,7 @@ const FooterTab = styled(NavLink)`
     padding: 0 .125rem;
     border-bottom: 2px solid ${({theme}) => theme.bg};
     transition: all 300ms linear;
-
+    position: relative;
     &:hover i{
         background: ${({theme}) => theme.primarycont};
         outline: 1px solid ${({theme}) => theme.primary};
@@ -46,15 +47,29 @@ const FooterTab = styled(NavLink)`
             color: ${({theme}) => theme.primarycont};
         }
     }
+    & small{
+        position: absolute;
+        top: -.5rem;
+        right: 1rem;
+        border-radius: 50%;
+        width: 1.30rem;
+        height: 1.30rem;
+        font-size: .6rem;
+        display: grid;
+        place-items: center;
+        background: ${({theme}) => theme.error};
+        color: ${({theme}) => theme.onerror};
+    }
 `;
 
-const Bottombar = ({page}) => {
+const Bottombar = () => {
+    const {unread} = useAppContext()
     return <Footer>
         <nav>
-            <FooterTab  to="/home"><Icon icon="home" />Home</FooterTab>
-            <FooterTab  to="/asignaciones"><Icon icon="supervisor_account"/>Asignaciones</FooterTab>
-            <FooterTab  to="/"><Icon icon="directions_car"/>Vehiculos</FooterTab>
-            <FooterTab  to="/notifications"><Icon icon="notifications"/>Notificaciones</FooterTab>
+            <FooterTab to="/home"><Icon icon="home" />Home</FooterTab>
+            <FooterTab to="/asignaciones"><Icon icon="supervisor_account"/>Asignaciones</FooterTab>
+            <FooterTab to="/"><Icon icon="directions_car"/>Vehiculos</FooterTab>
+            <FooterTab to="/notifications"><i className="material-icons">notifications</i>Notificaciones {unread > 0 && <small>{unread}</small>}</FooterTab>
         </nav>
     </Footer>
 }
