@@ -1,12 +1,13 @@
 importScripts("https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js");
 importScripts("https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js");
+const { VITE_APP_API_KEY, VITE_APP_MSENDER_ID, VITE_APP_ID } = import.meta.env;
 const defaultConfig = {
-    apiKey: "AIzaSyCCFxEM-hIG7Bl4TBsXl1oWbbF9ays4uBI",
+    apiKey: VITE_APP_API_KEY,
     authDomain: "aditum-delta.firebaseapp.com",
     projectId: "aditum-delta",
     storageBucket: "aditum-delta.appspot.com",
-    messagingSenderId: "908407543331",
-    appId: "1:908407543331:web:d0dc94822583e6f3ff8396"
+    messagingSenderId: VITE_APP_MSENDER_ID,
+    appId: VITE_APP_ID
 };
 
 firebase.initializeApp(defaultConfig);

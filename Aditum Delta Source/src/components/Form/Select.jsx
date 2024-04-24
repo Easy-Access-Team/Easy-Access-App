@@ -69,7 +69,7 @@ const Select = ({name, id, placeholder, label, options, selected, handleOption, 
         <InputSelect className={error && "error"} name={name} id={id} popovertarget={`${id}-options`}>
             <p className="value">{selected.title ? 
                 <>{selected.title} <Icon icon={selected.icon}/></> 
-                : <>{placeholder} <i className="material-icons dropdown-icon">arrow_drop_down</i></>}
+                : <>{placeholder} <i translate="no" className="material-icons dropdown-icon">arrow_drop_down</i></>}
             </p>
             <Options popover="auto" id={`${id}-options`}>
                 {options.map((option, i) => <Option key={option.value + i} value={option.value}

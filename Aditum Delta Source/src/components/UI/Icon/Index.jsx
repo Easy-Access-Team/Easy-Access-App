@@ -1,6 +1,6 @@
 const Icon = ({icon, onClick}) => {
 
-    return <i onClick={onClick} className="material-icons">
+    return <i translate="no" onClick={onClick} className="material-icons">
         {icon}
     </i>
 }

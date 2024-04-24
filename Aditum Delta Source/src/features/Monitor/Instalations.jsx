@@ -43,7 +43,7 @@ const MonitorInstalations = ({data, editAction}) => {
                             setDoc(instalation)
                         }}
                     />
-                    <i className="material-icons instalation-icon">{instalation.icon}</i>
+                    <i translate="no" className="material-icons instalation-icon">{instalation.icon}</i>
                 </section>
                 {id === instalation.id && <InstalationContext cleanRef={()=>{setID("")}}>
                     <button disabled={instalation.active === false} onClick={()=>{

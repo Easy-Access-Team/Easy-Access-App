@@ -47,7 +47,7 @@ const AdminInstalations = ({data, editAction, deactivate}) => {
                             setDoc(instalation)
                         }}
                     />
-                    <i className="material-icons instalation-icon">{instalation.icon}</i>
+                    <i translate="no" className="material-icons instalation-icon">{instalation.icon}</i>
                 </section>
                 {id === instalation.id && <Menu cleanRef={()=>{setID("")}}>
                     <button onClick={()=>{

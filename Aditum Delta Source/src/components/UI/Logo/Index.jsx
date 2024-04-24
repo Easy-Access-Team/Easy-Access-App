@@ -9,7 +9,7 @@ const SLogo = styled.div`
     color: ${({theme}) => theme.primary};
     text-decoration: none;
     &.default{
-        & img{width: 1.5rem;}
+        & img{width: 1.5rem; height: 1.5rem}
         & h2{line-height: normal;}
         @media screen and (min-width: 0px) and (max-width: 480px) {
             & h2{
@@ -21,7 +21,7 @@ const SLogo = styled.div`
         flex-direction: column;
         justify-content: center;
         text-align: center;
-        & img{width: 25%;}
+        & img{width: 5rem; height: 5rem;}
         & small{
             color: ${({theme}) => theme.outline};
             font-weight: 700;
@@ -32,7 +32,7 @@ const Logo = ({slogan, redirect = true}) =>{
     const LogoContent = () => {
         return <SLogo className={slogan ? "slogan" : "default"}>
             <img loading="lazy" src={logo} alt="Logo" />
-            <h2>Aditum <b>Delta</b></h2>
+            <h2 translate="no">Aditum <b>Delta</b></h2>
             {slogan && <small>Acceso Seguro, Acceso Facil.</small>}
         </SLogo>
     }
